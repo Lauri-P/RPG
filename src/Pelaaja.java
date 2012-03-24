@@ -5,6 +5,7 @@ public class Pelaaja extends Hahmo {
     int lvl;
     boolean maagi;
     Noppa d6;
+    
 
     public Pelaaja() {
         super();
