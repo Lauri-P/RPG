@@ -5,7 +5,7 @@ public class Pelaaja extends Hahmo {
     int lvl;
     boolean maagi;
     Noppa d6;
-    
+    Arkku inventory;
 
     public Pelaaja() {
         super();
@@ -33,6 +33,7 @@ public class Pelaaja extends Hahmo {
     }
 
     private void luo() {
+        inventory = new Arkku();
         maxHP = getStr() + 2 * getVit();
         maxMP = 2 * getIntl();
         hp = maxHP;

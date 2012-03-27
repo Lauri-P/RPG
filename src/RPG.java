@@ -1,18 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Koti
- */
 public class RPG {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+
+        //Tässä on toistaiseksi vain kaikenlaista testailua
+
+        Pelaaja soturi = new Pelaaja();
+        soturi.inventory.addEsine(new Esine());
+
+        System.out.println(Integer.parseInt("2"));
     }
 }

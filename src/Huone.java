@@ -20,68 +20,68 @@ public class Huone {
         lansi = null;
         etela = null;
     }
-    
-    public boolean getBossi(){
+
+    public boolean getBossi() {
         return bossi;
     }
-    
-    public boolean getKauppa(){
+
+    public boolean getKauppa() {
         return kauppa;
     }
-    
-    public Arkku getArkku(){
+
+    public Arkku getArkku() {
         return arkku;
     }
-    
-    public Vihollinen getVihollinen(){
+
+    public Vihollinen getVihollinen() {
         return vihollinen;
     }
-    
-    public Huone getPohjoinen(){
+
+    public Huone getPohjoinen() {
         return pohjoinen;
     }
-    
-    public Huone getIta(){
+
+    public Huone getIta() {
         return ita;
     }
-    
-    public Huone getEtela(){
+
+    public Huone getEtela() {
         return etela;
     }
-    
-    public Huone getLansi(){
+
+    public Huone getLansi() {
         return lansi;
     }
-    
-    public void setBossi(boolean onko){
-        bossi=onko;
+
+    public void setBossi(boolean onko) {
+        bossi = onko;
     }
-    
-    public void setKauppa(boolean onko){
-        kauppa=onko;
+
+    public void setKauppa(boolean onko) {
+        kauppa = onko;
     }
-    
-    public void setVihollinen(Vihollinen vihu){
-        vihollinen=vihu;
+
+    public void setVihollinen(Vihollinen vihu) {
+        vihollinen = vihu;
     }
-    
-    public void setArkku(Arkku loota){
-        arkku=loota;
+
+    public void setArkku(Arkku loota) {
+        arkku = loota;
     }
-    
-    public void setPohjoinen(Huone huone){
-        pohjoinen=huone;
+
+    public void setPohjoinen(Huone huone) {
+        pohjoinen = huone;
     }
-    
-    public void setIta(Huone huone){
-        ita=huone;
+
+    public void setIta(Huone huone) {
+        ita = huone;
     }
-    
-    public void setEtela(Huone huone){
-        etela=huone;
+
+    public void setEtela(Huone huone) {
+        etela = huone;
     }
-    
-    public void setLansi(Huone huone){
-        lansi=huone;
+
+    public void setLansi(Huone huone) {
+        lansi = huone;
     }
 }

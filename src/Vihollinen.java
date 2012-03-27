@@ -1,12 +1,10 @@
 
 import java.util.ArrayList;
 
-
 public class Vihollinen extends Hahmo {
-    
-    
+
     private ArrayList<String> weakness;
-    
+
     public Vihollinen() {
         super();
         luo();
@@ -31,25 +29,25 @@ public class Vihollinen extends Hahmo {
         super(str, vit, lck, intl);
         luo();
     }
-    
+
     private void luo() {
         maxHP = getStr() + 2 * getVit();
         maxMP = 2 * getIntl();
         hp = maxHP;
         mp = maxMP;
-        
-        weakness=new ArrayList<String>();
+
+        weakness = new ArrayList<String>();
     }
-    
-    public ArrayList<String> getWeak(){
+
+    public ArrayList<String> getWeak() {
         return weakness;
     }
-    
-    public void setWeak(ArrayList<String> heikkoudet){
-        weakness=heikkoudet;
+
+    public void setWeak(ArrayList<String> heikkoudet) {
+        weakness = heikkoudet;
     }
-    
-    public void addWeak(String heikkous){
+
+    public void addWeak(String heikkous) {
         weakness.add(heikkous);
     }
 }
