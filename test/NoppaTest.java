@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import org.junit.*;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Koti
- */
 public class NoppaTest {
 
     public NoppaTest() {
@@ -31,9 +23,6 @@ public class NoppaTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of heitto method, of class Noppa.
-     */
     @Test
     public void testHeittoD6() {
         boolean toimii = true;
@@ -85,7 +74,7 @@ public class NoppaTest {
         }
         assertTrue(toimii);
     }
-    
+
     @Test
     public void testHeittoD6Neg() {
         boolean toimii = true;
@@ -136,5 +125,27 @@ public class NoppaTest {
             }
         }
         assertTrue(toimii);
+    }
+
+    @Test
+    public void testGetteri() {
+        Noppa d6 = new Noppa();
+        Noppa d10 = new Noppa(10);
+        assertEquals(d6.getSivut(), 6);
+        assertEquals(d10.getSivut(), 10);
+    }
+
+    @Test
+    public void testSetteri() {
+        Noppa d6 = new Noppa();
+        assertEquals(d6.getSivut(), 6);
+        d6.setSivut(10);
+        assertEquals(d6.getSivut(), 10);
+    }
+
+    @Test
+    public void testNeg() {
+        Noppa d6 = new Noppa(-8);
+        assertEquals(d6.getSivut(), 6);
     }
 }

@@ -7,6 +7,7 @@ public class Esine {
     boolean consumed;
     String nimi;
     String ominaisuudet;
+    String kuvaus;
 
     public Esine() {
 
@@ -16,6 +17,7 @@ public class Esine {
         consumed = false;
         nimi = "EI NIMEÄ";
         ominaisuudet = "";
+        kuvaus = "EI KUVAUSTA";
 
     }
 
@@ -27,7 +29,17 @@ public class Esine {
         consumed = false;
         this.nimi = nimi;
         this.ominaisuudet = ominaisuudet;
+        kuvaus = "EI KUVAUSTA";
+    }
 
+    public Esine(String nimi, String ominaisuudet, String kuvaus, boolean equipable, boolean consumable) {
+        this.equipable = equipable;
+        equiped = false;
+        this.consumable = consumable;
+        consumed = false;
+        this.nimi = nimi;
+        this.ominaisuudet = ominaisuudet;
+        this.kuvaus = kuvaus;
     }
 
     public String getNimi() {
@@ -36,6 +48,10 @@ public class Esine {
 
     public String getOminaisuudet() {
         return ominaisuudet;
+    }
+
+    public String getKuvaus() {
+        return kuvaus;
     }
 
     public boolean getConsumable() {
@@ -60,6 +76,10 @@ public class Esine {
 
     public void setOminaisuudet(String ominaisuudet) {//Ominaisuudet kirjataan muodossa "STA1:INT1,STA2:INT2,...,STAi:INTi", jossa STAi on status, johon halutaan vaikuttaa ja INTi on vaikutuksen suuruus. Esim "STR:3,HP:-6" lisää voimaa kolmella ja vähentä HP:itä kuudella
         this.ominaisuudet = ominaisuudet;
+    }
+
+    public void setKuvaus(String kuvaus) {
+        this.kuvaus = kuvaus;
     }
 
     public void setConsumable(boolean consumable) {

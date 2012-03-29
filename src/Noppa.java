@@ -11,7 +11,7 @@ public class Noppa {
         if (sivut > 0) {
             this.sivut = sivut;
         } else {
-            sivut = 6;
+            this.sivut = 6;
         }
     }
 
@@ -29,5 +29,13 @@ public class Noppa {
             summa += heitto();
         }
         return kerroin * summa;
+    }
+    
+    public int getSivut(){
+        return sivut;
+    }
+    
+    public void setSivut(int sivut){
+        this.sivut=sivut;
     }
 }
