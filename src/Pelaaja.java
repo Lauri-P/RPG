@@ -100,4 +100,8 @@ public class Pelaaja extends Hahmo {
         maxHP = getStr() + 2 * getVit();
         maxMP = 2 * getIntl();
     }
+
+    public Arkku getInventory() {
+        return inventory;
+    }
 }
