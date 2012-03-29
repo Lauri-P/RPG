@@ -18,20 +18,31 @@ public class EsineTulkki {
             kohde.addHP(Integer.parseInt(toteutettava[1]));
         } else if (toteutettava[0].equalsIgnoreCase("MP")) {
             kohde.addMP(Integer.parseInt(toteutettava[1]));
-        } else if (toteutettava[0].equalsIgnoreCase("MAXHP")) {
-            kohde.addMaxHP(Integer.parseInt(toteutettava[1]));
-        } else if (toteutettava[0].equalsIgnoreCase("MAXMP")) {
-            kohde.addMaxMP(Integer.parseInt(toteutettava[1]));
         }
+
+        //Maksimien muutos ei seuraa helposti pelaajan metodin paivitaMaximit() mukana
+//        else if (toteutettava[0].equalsIgnoreCase("MAXHP")) {
+//            kohde.addMaxHP(Integer.parseInt(toteutettava[1]));
+//        } else if (toteutettava[0].equalsIgnoreCase("MAXMP")) {
+//            kohde.addMaxMP(Integer.parseInt(toteutettava[1]));
+//        }
     }
 
     private void peru(String ominaisuus) {
         String[] peruttava = ominaisuus.split(":");
-        toteuta(peruttava[0] + (-(Integer.parseInt(peruttava[1]))));
+        toteuta(peruttava[0] + ":" + (-(Integer.parseInt(peruttava[1]))));
     }
 
     public EsineTulkki(Hahmo kohde) {
         this.kohde = kohde;
+    }
+
+    public void setHahmo(Hahmo kohde) {
+        this.kohde = kohde;
+    }
+
+    public Hahmo getHahmo() {
+        return kohde;
     }
 
     public void consume(Esine esine) {

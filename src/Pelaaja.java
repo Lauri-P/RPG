@@ -34,8 +34,7 @@ public class Pelaaja extends Hahmo {
 
     private void luo() {
         inventory = new Arkku();
-        maxHP = getStr() + 2 * getVit();
-        maxMP = 2 * getIntl();
+        paivitaMaximit();
         hp = maxHP;
         mp = maxMP;
         exp = 0;
@@ -92,9 +91,13 @@ public class Pelaaja extends Hahmo {
                 addLck(1);
             }
         }
-        maxHP = getStr() + 2 * getVit();
-        maxMP = 2 * getIntl();
+        paivitaMaximit();
         hp = maxHP;
         mp = maxMP;
+    }
+
+    public void paivitaMaximit() {
+        maxHP = getStr() + 2 * getVit();
+        maxMP = 2 * getIntl();
     }
 }

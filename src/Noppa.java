@@ -30,12 +30,12 @@ public class Noppa {
         }
         return kerroin * summa;
     }
-    
-    public int getSivut(){
+
+    public int getSivut() {
         return sivut;
     }
-    
-    public void setSivut(int sivut){
-        this.sivut=sivut;
+
+    public void setSivut(int sivut) {
+        this.sivut = sivut;
     }
 }

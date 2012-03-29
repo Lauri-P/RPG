@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.util.ArrayList;
 import org.junit.After;
@@ -11,10 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Lauri
- */
 public class ArkkuTest {
 
     public ArkkuTest() {
@@ -36,9 +28,6 @@ public class ArkkuTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of addEsine method, of class Arkku.
-     */
     @Test
     public void testLuonti() {
 

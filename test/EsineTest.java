@@ -47,7 +47,7 @@ public class EsineTest {
     
     @Test
     public void testLuontiKuvauksella() {
-        Esine esine=new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+        Esine esine = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
         assertTrue(!(!esine.getConsumable()||esine.getConsumed()||esine.getEquipable()||esine.getEquiped()));
         assertEquals(esine.getNimi(), "Potion");
         assertEquals(esine.getOminaisuudet(), "HP:20");
