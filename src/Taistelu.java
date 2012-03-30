@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Taistelu {
@@ -53,7 +54,11 @@ public class Taistelu {
     private void esine() {
         System.out.println("Valitse käytettävä esine, 0 peruuttaa");
         for (int i = 0; i < pelaaja.getInventory().getEsineet().size(); i++) {
-            System.out.println((i + 1) + ": " + pelaaja.getInventory().getEsineet().get(i).nimi + ": " + pelaaja.getInventory().getEsineet().get(i).kuvaus);
+            System.out.print((i + 1) + ": " + pelaaja.getInventory().getEsineet().get(i).nimi + ": " + pelaaja.getInventory().getEsineet().get(i).kuvaus);
+            if (pelaaja.getInventory().getEsineet().get(i).getEquiped()) {
+                System.out.print("(Equiped)");
+            }
+            System.out.println("");
         }
         int valinta = lukija.nextInt();
         if (valinta > 0 && valinta <= pelaaja.getInventory().getEsineet().size()) {
@@ -70,14 +75,42 @@ public class Taistelu {
                 }
                 vuoro = false;
             }
+            else{
+                System.out.println("Can't consume that");
+            }
         }
 
     }
 
-    private void taika(Hahmo kayttaja, Hahmo kohde) {
-        //Toteutetaan myöhemmin
-        System.out.println("BUY DLC");
-        odota();
+    private void taika(Pelaaja kayttaja, Vihollinen kohde) {
+        
+        System.out.println("Valitse käytettävä taika, 0 peruuttaa");
+        for (int i = 0; i < pelaaja.getTaiat().size(); i++) {
+            System.out.println((i + 1) + ": " + pelaaja.getTaiat().get(i).getNimi() + ": " + pelaaja.getTaiat().get(i).getHinta() + " MP");
+        }
+        int valinta = lukija.nextInt();
+        if (valinta > 0 && valinta <= pelaaja.getTaiat().size()) {
+            Taika taika = pelaaja.getTaiat().get(valinta - 1);
+            if (kayttaja.getMP() >= taika.getHinta()) {
+                kayttaja.addMP(-taika.getHinta());
+                int vahinko = taika.getTeho();
+                ArrayList<String> weakness = kohde.getWeak();
+                for (int i = 0; i < weakness.size(); i++) {
+                    if (taika.getTyyppi().contains(weakness.get(i))) {
+                        vahinko = vahinko * 2;
+                    }
+                }
+                System.out.println("Player used " + taika.getNimi());
+                odota();
+                if (d6.heitto(3) < kayttaja.getLck()) {
+                    vahinko = vahinko * 2;
+                    System.out.println("Critical Hit!");
+                    odota();
+                }
+                kohde.addHP(-vahinko);
+                vuoro = false;
+            }
+        }
     }
 
     private void hyokkaa(Hahmo kayttaja, Hahmo kohde) {

@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+
 public class Pelaaja extends Hahmo {
 
     int exp;
@@ -6,6 +8,7 @@ public class Pelaaja extends Hahmo {
     boolean maagi;
     Noppa d6;
     Arkku inventory;
+    ArrayList<Taika> taiat;
 
     public Pelaaja() {
         super();
@@ -41,6 +44,7 @@ public class Pelaaja extends Hahmo {
         lvl = 1;
         maagi = getIntl() > 0;
         d6 = new Noppa();
+        taiat = new ArrayList<>();
 
     }
 
@@ -90,18 +94,31 @@ public class Pelaaja extends Hahmo {
             if (d6.heitto(4) < getLck()) {
                 addLck(1);
             }
+
         }
         paivitaMaximit();
         hp = maxHP;
         mp = maxMP;
+        System.out.println("LEVEL UP!\nSTR: " + getStr() + "  VIT: " + getVit() + "  LCK: " + getLck() + "  INTL: " + getIntl() + "\nHP: " + getHP() + "/" + getMaxHP() + "  MP: " + getMP() + "/" + getMaxMP());
+
     }
 
     public void paivitaMaximit() {
         maxHP = getStr() + 2 * getVit();
         maxMP = 2 * getIntl();
+        if (hp > maxHP) {
+            hp = maxHP;
+        }
+        if (mp > maxMP) {
+            mp = maxMP;
+        }
     }
 
     public Arkku getInventory() {
         return inventory;
+    }
+
+    public ArrayList<Taika> getTaiat() {
+        return taiat;
     }
 }
