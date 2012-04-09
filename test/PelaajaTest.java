@@ -29,164 +29,253 @@ public class PelaajaTest {
     }
 
     @Test
-    public void testSoturinLuonti() {
-
+    public void testSoturinLuontiStr() {
         assertEquals(soturi.getStr(), 12);
+    }
+
+    @Test
+    public void testSoturinLuontiVit() {
         assertEquals(soturi.getVit(), 12);
+    }
+
+    @Test
+    public void testSoturinLuontiLck() {
         assertEquals(soturi.getLck(), 8);
+    }
+
+    @Test
+    public void testSoturinLuontiIntl() {
         assertEquals(soturi.getIntl(), 0);
     }
 
     @Test
-    public void testSoturinHPMP() {
-
-        assertEquals(soturi.getMaxHP(), 36);
-        assertEquals(soturi.getMaxMP(), 0);
+    public void testSoturinLuontiHP() {
         assertEquals(soturi.getHP(), 36);
+    }
+
+    @Test
+    public void testSoturinLuontiMP() {
         assertEquals(soturi.getMP(), 0);
     }
 
     @Test
-    public void testMaaginLuonti() {
+    public void testSoturinLuontiMaxHP() {
+        assertEquals(soturi.getMaxHP(), 36);
+    }
 
+    @Test
+    public void testSoturinLuontiMaxMP() {
+        assertEquals(soturi.getMaxMP(), 0);
+    }
+
+    @Test
+    public void testSoturinLuontiInventory() {
+        assertTrue(soturi.getInventory().getEsineet().isEmpty());
+    }
+
+    @Test
+    public void testSoturinLuontiTaiat() {
+        assertTrue(soturi.getTaiat().isEmpty());
+    }
+
+    @Test
+    public void testSoturinLuontiExp() {
+        assertEquals(soturi.getExp(), 0);
+    }
+
+    @Test
+    public void testSoturinLuontiLvl() {
+        assertEquals(soturi.getLvl(), 1);
+    }
+
+    @Test
+    public void testMaaginLuontiStr() {
         assertEquals(maagi.getStr(), 8);
+    }
+
+    @Test
+    public void testMaaginLuontiVit() {
         assertEquals(maagi.getVit(), 8);
+    }
+
+    @Test
+    public void testMaaginLuontiLck() {
         assertEquals(maagi.getLck(), 8);
+    }
+
+    @Test
+    public void testMaaginLuontiIntl() {
         assertEquals(maagi.getIntl(), 8);
     }
 
     @Test
-    public void testMaaginHPMP() {
-
-        assertEquals(maagi.getMaxHP(), 24);
-        assertEquals(maagi.getMaxMP(), 16);
+    public void testMaaginLuontiHP() {
         assertEquals(maagi.getHP(), 24);
+    }
+
+    @Test
+    public void testMaaginLuontiMP() {
         assertEquals(maagi.getMP(), 16);
     }
 
     @Test
-    public void testMaaginVahingoitus() {
-
+    public void testMaaginLuontiMaxHP() {
         assertEquals(maagi.getMaxHP(), 24);
-        assertEquals(maagi.getMaxMP(), 16);
-        assertEquals(maagi.getHP(), 24);
-        assertEquals(maagi.getMP(), 16);
-
-        maagi.addHP(-8);
-
-        assertEquals(maagi.getMaxHP(), 24);
-        assertEquals(maagi.getMaxMP(), 16);
-        assertEquals(maagi.getHP(), 16);
-        assertEquals(maagi.getMP(), 16);
-
-        maagi.addHP(10);
-
-        assertEquals(maagi.getMaxHP(), 24);
-        assertEquals(maagi.getMaxMP(), 16);
-        assertEquals(maagi.getHP(), 24);
-        assertEquals(maagi.getMP(), 16);
-
-        maagi.addHP(-18);
-
-        assertEquals(maagi.getMaxHP(), 24);
-        assertEquals(maagi.getMaxMP(), 16);
-        assertEquals(maagi.getHP(), 6);
-        assertEquals(maagi.getMP(), 16);
-
-        maagi.addHP(-18);
-
-        assertEquals(maagi.getMaxHP(), 24);
-        assertEquals(maagi.getMaxMP(), 16);
-        assertEquals(maagi.getHP(), 0);
-        assertEquals(maagi.getMP(), 16);
-
     }
 
     @Test
-    public void testMaaginTaiat() {
-
-        assertEquals(maagi.getMaxHP(), 24);
+    public void testMaaginLuontiMaxMP() {
         assertEquals(maagi.getMaxMP(), 16);
-        assertEquals(maagi.getHP(), 24);
-        assertEquals(maagi.getMP(), 16);
-
-        maagi.addMP(-8);
-
-        assertEquals(maagi.getMaxHP(), 24);
-        assertEquals(maagi.getMaxMP(), 16);
-        assertEquals(maagi.getHP(), 24);
-        assertEquals(maagi.getMP(), 8);
-
-        maagi.addMP(10);
-
-        assertEquals(maagi.getMaxHP(), 24);
-        assertEquals(maagi.getMaxMP(), 16);
-        assertEquals(maagi.getHP(), 24);
-        assertEquals(maagi.getMP(), 16);
-
-        maagi.addMP(-12);
-
-        assertEquals(maagi.getMaxHP(), 24);
-        assertEquals(maagi.getMaxMP(), 16);
-        assertEquals(maagi.getHP(), 24);
-        assertEquals(maagi.getMP(), 4);
-
-        maagi.addMP(-18);
-
-        assertEquals(maagi.getMaxHP(), 24);
-        assertEquals(maagi.getMaxMP(), 16);
-        assertEquals(maagi.getHP(), 24);
-        assertEquals(maagi.getMP(), 0);
-
     }
 
     @Test
-    public void testSoturinLevelit() {
-        assertEquals(soturi.getExp(), 0);
-        assertEquals(soturi.getLvl(), 1);
-        soturi.addExp(50);
-        assertEquals(soturi.getExp(), 50);
-        assertEquals(soturi.getLvl(), 1);
-
-        soturi.addHP(-20);
-        assertEquals(soturi.getHP(), 16);
-        soturi.addExp(150);
-        assertEquals(soturi.getExp(), 100);
-        assertEquals(soturi.getLvl(), 2);
-
-        assertEquals(soturi.getStr(), 14);
-        assertEquals(soturi.getVit(), 14);
-        assertEquals(soturi.getIntl(), 0);
-
-        assertEquals(soturi.getMaxHP(), 42);
-        assertEquals(soturi.getMaxMP(), 0);
-        assertEquals(soturi.getHP(), 42);
-        assertEquals(soturi.getMP(), 0);
+    public void testMaaginLuontiInventory() {
+        assertTrue(maagi.getInventory().getEsineet().isEmpty());
     }
 
     @Test
-    public void testMaaginLevelitMonta() {
-        maagi.addExp(1000);
+    public void testMaaginLuontiTaiat() {
+        assertTrue(maagi.getTaiat().isEmpty());
+    }
+
+    @Test
+    public void testMaaginLuontiExp() {
         assertEquals(maagi.getExp(), 0);
-        assertEquals(maagi.getLvl(), 5);
-
-        assertEquals(maagi.getStr(), 12);
-        assertEquals(maagi.getVit(), 12);
-        assertEquals(maagi.getIntl(), 12);
-
-        assertEquals(maagi.getMaxHP(), 36);
-        assertEquals(maagi.getMaxMP(), 24);
-        assertEquals(maagi.getHP(), 36);
-        assertEquals(maagi.getMP(), 24);
     }
 
     @Test
-    public void testMaxPaivitys() {
+    public void testMaaginLuontiLvl() {
+        assertEquals(maagi.getLvl(), 1);
+    }
+
+    @Test
+    public void testPaivitaMaximitStrHP() {
         maagi.addStr(1);
+        maagi.paivitaMaximit();
+        assertEquals(maagi.getMaxHP(), 25);
+    }
+
+    @Test
+    public void testPaivitaMaximitVitHP() {
         maagi.addVit(1);
+        maagi.paivitaMaximit();
+        assertEquals(maagi.getMaxHP(), 26);
+    }
+
+    @Test
+    public void testPaivitaMaximitIntlMP() {
         maagi.addIntl(1);
         maagi.paivitaMaximit();
-        assertEquals(maagi.getMaxHP(), 27);
         assertEquals(maagi.getMaxMP(), 18);
+    }
+
+    @Test
+    public void testSetExp() {
+        maagi.setExp(1000);
+        assertEquals(maagi.getExp(), 1000);
+    }
+
+    @Test
+    public void testSetExpNeg() {
+        maagi.setExp(-1000);
+        assertEquals(maagi.getExp(), -1000);
+    }
+
+    @Test
+    public void testSetLvl() {
+        maagi.setLvl(8);
+        assertEquals(maagi.getLvl(), 8);
+    }
+
+    @Test
+    public void testSetLvlNeg() {
+        maagi.setLvl(-8);
+        assertEquals(maagi.getLvl(), -8);
+    }
+
+    @Test
+    public void testAddLvl() {
+        maagi.addLvl(1);
+        assertEquals(maagi.getLvl(), 2);
+    }
+
+    @Test
+    public void testAddLvlNeg() {
+        maagi.addLvl(-2);
+        assertEquals(maagi.getLvl(), -1);
+    }
+
+    @Test
+    public void testLevelUpLiaanVahanLvl() {
+        maagi.setExp(50);
+        maagi.levelUp();
+        assertEquals(maagi.getLvl(), 1);
+    }
+
+    @Test
+    public void testLevelUpTasanLvl() {
+        maagi.setExp(100);
+        maagi.levelUp();
+        assertEquals(maagi.getLvl(), 2);
+    }
+
+    @Test
+    public void testLevelUpYliLvl() {
+        maagi.setExp(150);
+        maagi.levelUp();
+        assertEquals(maagi.getLvl(), 2);
+    }
+
+    @Test
+    public void testLevelUpMonenVerranLvl() {
+        maagi.setExp(1000);
+        maagi.levelUp();
+        assertEquals(maagi.getLvl(), 5);
+    }
+
+    @Test
+    public void testLevelUpLiaanVahanExp() {
+        maagi.setExp(50);
+        maagi.levelUp();
+        assertEquals(maagi.getExp(), 50);
+    }
+
+    @Test
+    public void testLevelUpTasanExp() {
+        maagi.setExp(100);
+        maagi.levelUp();
+        assertEquals(maagi.getExp(), 0);
+    }
+
+    @Test
+    public void testLevelUpYliExp() {
+        maagi.setExp(150);
+        maagi.levelUp();
+        assertEquals(maagi.getExp(), 50);
+    }
+
+    @Test
+    public void testLevelUpMonenVerranExp() {
+        maagi.setExp(1050);
+        maagi.levelUp();
+        assertEquals(maagi.getExp(), 50);
+    }
+
+    @Test
+    public void testAddExpAlle() {
+        maagi.addExp(50);
+        assertEquals(maagi.getExp(), 50);
+    }
+
+    @Test
+    public void testAddExpTasan() {
+        maagi.addExp(100);
+        assertEquals(maagi.getExp(), 0);
+    }
+
+    @Test
+    public void testAddExpYli() {
+        maagi.addExp(150);
+        assertEquals(maagi.getExp(), 50);
     }
 }

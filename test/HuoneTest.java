@@ -8,6 +8,8 @@ import static org.junit.Assert.*;
 
 public class HuoneTest {
 
+    Huone huone;
+
     public HuoneTest() {
     }
 
@@ -21,6 +23,7 @@ public class HuoneTest {
 
     @Before
     public void setUp() {
+        huone = new Huone();
     }
 
     @After
@@ -28,21 +31,101 @@ public class HuoneTest {
     }
 
     @Test
-    public void testLuoHuone() {
-        Huone huone = new Huone();
+    public void testLuontiBossi() {
         assertTrue(!huone.getBossi());
+    }
+
+    @Test
+    public void testLuontiKauppa() {
         assertTrue(!huone.getKauppa());
+    }
+
+    @Test
+    public void testLuontiArkku() {
         assertEquals(huone.getArkku(), null);
+    }
+
+    @Test
+    public void testLuontiVihollinen() {
         assertEquals(huone.getVihollinen(), null);
+    }
+
+    @Test
+    public void testLuontiPohjoinen() {
         assertEquals(huone.getPohjoinen(), null);
+    }
+
+    @Test
+    public void testLuontiLansi() {
         assertEquals(huone.getLansi(), null);
+    }
+
+    @Test
+    public void testLuontiEtela() {
         assertEquals(huone.getEtela(), null);
+    }
+
+    @Test
+    public void testLuontiIta() {
         assertEquals(huone.getIta(), null);
     }
 
     @Test
-    public void testHuoneet() {
-        Huone huone = new Huone();
+    public void testSetBossi() {
+        huone.setBossi(true);
+        assertTrue(huone.getBossi());
+    }
+
+    @Test
+    public void testSetKauppa() {
+        huone.setKauppa(true);
+        assertTrue(huone.getKauppa());
+    }
+
+    @Test
+    public void testSetArkku() {
+        Arkku arkku = new Arkku();
+        huone.setArkku(arkku);
+        assertEquals(huone.getArkku(), arkku);
+    }
+
+    @Test
+    public void testSetVihollinen() {
+        Vihollinen vihollinen = new Vihollinen();
+        huone.setVihollinen(vihollinen);
+        assertEquals(huone.getVihollinen(), vihollinen);
+    }
+
+    @Test
+    public void testSetPohjoinen() {
+        Huone yla = new Huone();
+        huone.setPohjoinen(yla);
+        assertEquals(huone.getPohjoinen(), yla);
+    }
+
+    @Test
+    public void testSetLansi() {
+        Huone vasen = new Huone();
+        huone.setLansi(vasen);
+        assertEquals(huone.getLansi(), vasen);
+    }
+
+    @Test
+    public void testSetEtela() {
+        Huone ala = new Huone();
+        huone.setEtela(ala);
+        assertEquals(huone.getEtela(), ala);
+    }
+
+    @Test
+    public void testSetIta() {
+        Huone oikea = new Huone();
+        huone.setIta(oikea);
+        assertEquals(huone.getIta(), oikea);
+    }
+
+    @Test // Tässä testataan huoneidenmuodostusta hieman laajemmin
+    public void testHuoneita() {
         Huone vasen = new Huone();
         Huone yla = new Huone();
         Huone ala = new Huone();
@@ -68,21 +151,5 @@ public class HuoneTest {
         assertEquals(oikea.getLansi(), huone);
         assertEquals(yla.getEtela(), huone);
         assertEquals(vasen.getIta(), huone);
-    }
-
-    @Test
-    public void testMuutSetterit() {
-        Huone huone = new Huone();
-        huone.setBossi(true);
-        huone.setKauppa(true);
-        Arkku arkku = new Arkku();
-        Vihollinen vihollinen = new Vihollinen();
-        huone.setArkku(arkku);
-        huone.setVihollinen(vihollinen);
-
-        assertTrue(huone.getBossi());
-        assertTrue(huone.getKauppa());
-        assertEquals(huone.getArkku(), arkku);
-        assertEquals(huone.getVihollinen(), vihollinen);
     }
 }

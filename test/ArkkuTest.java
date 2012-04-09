@@ -9,6 +9,11 @@ import static org.junit.Assert.*;
 
 public class ArkkuTest {
 
+    Arkku arkku;
+    Esine potion;
+    Esine miekka;
+    ArrayList<Esine> esineet;
+
     public ArkkuTest() {
     }
 
@@ -22,6 +27,12 @@ public class ArkkuTest {
 
     @Before
     public void setUp() {
+        arkku = new Arkku();
+        potion = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+        miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
+        esineet = new ArrayList<>();
+        esineet.add(miekka);
+        esineet.add(potion);
     }
 
     @After
@@ -30,44 +41,23 @@ public class ArkkuTest {
 
     @Test
     public void testLuonti() {
-
-        Arkku arkku = new Arkku();
         assertTrue(arkku.getEsineet().isEmpty());
-
     }
 
     @Test
-    public void testLisays() {
-
-        Arkku arkku = new Arkku();
-        Esine potion = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+    public void testAddEsine() {
         arkku.addEsine(potion);
         assertTrue(arkku.getEsineet().contains(potion));
     }
 
     @Test
-    public void testMoniLisays() {
-
-        Arkku arkku = new Arkku();
-        Esine potion = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
-        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
-        ArrayList<Esine> esineet = new ArrayList<Esine>();
-        esineet.add(miekka);
-        esineet.add(potion);
+    public void testSetEsineet() {
         arkku.setEsineet(esineet);
-        assertTrue(arkku.getEsineet().contains(potion));
-        assertTrue(arkku.getEsineet().contains(miekka));
+        assertTrue(arkku.getEsineet().containsAll(esineet));
     }
 
     @Test
-    public void testPoisto() {
-
-        Arkku arkku = new Arkku();
-        Esine potion = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
-        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
-        ArrayList<Esine> esineet = new ArrayList<Esine>();
-        esineet.add(miekka);
-        esineet.add(potion);
+    public void testRemoveEsine() {
         arkku.setEsineet(esineet);
         arkku.removeEsine(miekka);
         assertTrue(arkku.getEsineet().contains(potion));
@@ -75,14 +65,7 @@ public class ArkkuTest {
     }
 
     @Test
-    public void testPoistaKaikki() {
-
-        Arkku arkku = new Arkku();
-        Esine potion = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
-        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
-        ArrayList<Esine> esineet = new ArrayList<Esine>();
-        esineet.add(miekka);
-        esineet.add(potion);
+    public void testRemoveAll() {
         arkku.setEsineet(esineet);
         arkku.removeAll();
         assertTrue(arkku.getEsineet().isEmpty());

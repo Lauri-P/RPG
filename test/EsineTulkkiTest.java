@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 
 public class EsineTulkkiTest {
 
+    EsineTulkki tulkki;
+    Hahmo hahmo;
+
     public EsineTulkkiTest() {
     }
 
@@ -21,6 +24,8 @@ public class EsineTulkkiTest {
 
     @Before
     public void setUp() {
+        hahmo = new Pelaaja(8, 8, 8, 8);
+        tulkki = new EsineTulkki(hahmo);
     }
 
     @After
@@ -28,39 +33,112 @@ public class EsineTulkkiTest {
     }
 
     @Test
-    public void testLuontiJaVaihto() {
-        Vihollinen vihu = new Vihollinen(1, 2, 3, 4);
-        Pelaaja pelaaja = new Pelaaja(8, 8, 8, 8);
-        EsineTulkki tulkki = new EsineTulkki(vihu);
-        assertEquals(tulkki.getHahmo(), vihu);
-        tulkki.setHahmo(pelaaja);
-        assertEquals(tulkki.getHahmo(), pelaaja);
+    public void testLuontiHahmo() {
+        assertEquals(tulkki.getHahmo(), hahmo);
     }
 
     @Test
-    public void testConsume() {
+    public void testSetHahmo() {
+        Vihollinen vihu = new Vihollinen(1, 2, 3, 4);
+        tulkki.setHahmo(vihu);
+        assertEquals(tulkki.getHahmo(), vihu);
+    }
+
+    @Test
+    public void testConsumeOminaisuus() {
         Esine potion = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
-        Pelaaja pelaaja = new Pelaaja(8, 8, 8, 8);
-        EsineTulkki tulkki = new EsineTulkki(pelaaja);
-        pelaaja.addHP(-8);
-        assertEquals(pelaaja.getHP(), 16);
+        hahmo.addHP(-22);
         tulkki.consume(potion);
-        assertEquals(pelaaja.getHP(), 24);
+        assertEquals(hahmo.getHP(), 22);
+    }
+
+    @Test
+    public void testConsumeConsumed() {
+        Esine potion = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+        tulkki.consume(potion);
         assertTrue(potion.getConsumed());
     }
 
     @Test
-    public void testEquip() {
+    public void testConsumeOminaisuusNotConsumable() {
+        Esine potion = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, false);
+        hahmo.addHP(-22);
+        tulkki.consume(potion);
+        assertEquals(hahmo.getHP(), 2);
+    }
+
+    @Test
+    public void testConsumeConsumedNotConsumable() {
+        Esine potion = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, false);
+        tulkki.consume(potion);
+        assertFalse(potion.getConsumed());
+    }
+
+    @Test
+    public void testConsumeOminaisuusAlreadyConsumed() {
+        Esine potion = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+        hahmo.addHP(-22);
+        tulkki.consume(potion);
+        tulkki.consume(potion);
+        assertEquals(hahmo.getHP(), 22);
+    }
+
+    @Test
+    public void testEquipOminaisuus() {
         Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
-        Pelaaja pelaaja = new Pelaaja(8, 8, 8, 8);
-        EsineTulkki tulkki = new EsineTulkki(pelaaja);
         tulkki.equip(miekka);
-        pelaaja.paivitaMaximit();
-        assertEquals(pelaaja.getStr(), 11);
-        assertEquals(pelaaja.getMaxHP(), 27);
+        assertEquals(hahmo.getStr(), 11);
+    }
+
+    @Test
+    public void testEquipEquiped() {
+        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
+        tulkki.equip(miekka);
+        assertTrue(miekka.getEquiped());
+    }
+
+    @Test
+    public void testEquipOminaisuusNotEquipable() {
+        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", false, false);
+        tulkki.equip(miekka);
+        assertEquals(hahmo.getStr(), 8);
+    }
+
+    @Test
+    public void testEquipEquipedNotEquipable() {
+        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", false, false);
+        tulkki.equip(miekka);
+        assertFalse(miekka.getEquiped());
+    }
+
+    @Test
+    public void testEquipOminaisuusAlreadyEquiped() {
+        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
+        tulkki.equip(miekka);
+        tulkki.equip(miekka);
+        assertEquals(hahmo.getStr(), 11);
+    }
+
+    @Test
+    public void testUnEquipOminaisuus() {
+        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
+        tulkki.equip(miekka);
         tulkki.unEquip(miekka);
-        pelaaja.paivitaMaximit();
-        assertEquals(pelaaja.getStr(), 8);
-        assertEquals(pelaaja.getMaxHP(), 24);
+        assertEquals(hahmo.getStr(), 8);
+    }
+
+    @Test
+    public void testUnEquipEquiped() {
+        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
+        tulkki.equip(miekka);
+        tulkki.unEquip(miekka);
+        assertFalse(miekka.getEquiped());
+    }
+
+    @Test
+    public void testUnEquipOminaisuusNotEquiped() {
+        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
+        tulkki.unEquip(miekka);
+        assertEquals(hahmo.getStr(), 8);
     }
 }

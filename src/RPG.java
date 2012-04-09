@@ -53,7 +53,7 @@ public class RPG {
             if (esine.getConsumable() && !esine.getConsumed()) {
                 tulkki.consume(esine);
                 System.out.println("Player consumed " + esine.getNimi());
-                
+
                 if (esine.getConsumed()) {
                     while (pelaaja.getInventory().getEsineet().contains(esine)) {
                         pelaaja.getInventory().getEsineet().remove(esine);
@@ -73,8 +73,10 @@ public class RPG {
     }
 
     private static void huone(Pelaaja pelaaja, Huone missa, int mista) {
-        String[] suunnat={"south", "west", "north", "east"};
-        System.out.println("You went to " +suunnat[mista-1]);
+        String[] suunnat = {"south", "west", "north", "east"};
+        if (mista > 0) {
+            System.out.println("You went to " + suunnat[mista - 1]);
+        }
         Taistelu taistelu = new Taistelu(pelaaja);
         if (missa.getVihollinen() != null) {
             taistelu.taistele(missa.getVihollinen());
@@ -106,7 +108,7 @@ public class RPG {
                 }
 
                 Noppa huonenoppa = new Noppa(huoneet.size());
-                Huone mihin = huoneet.get(huonenoppa.heitto()-1);
+                Huone mihin = huoneet.get(huonenoppa.heitto() - 1);
                 if (mihin == missa.getPohjoinen()) {
                     huone(pelaaja, mihin, 3);
                 }
@@ -223,9 +225,9 @@ public class RPG {
         Huone h2 = new Huone();
         Huone h3 = new Huone();
         Huone h4 = new Huone();
-        
-        Arkku arkku=new Arkku();
-        Arkku arkku2=new Arkku();
+
+        Arkku arkku = new Arkku();
+        Arkku arkku2 = new Arkku();
         arkku.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
         arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
         arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
@@ -246,10 +248,10 @@ public class RPG {
 
         h1.setArkku(arkku);
         h3.setArkku(arkku2);
-        
+
         h4.setBossi(true);
 
-        huone(soturi, h0, 3);
+        huone(soturi, h0, 0);
 
 //        ArrayList<Vihollinen> vihut = new ArrayList<>();
 //        vihut.add(vihu);

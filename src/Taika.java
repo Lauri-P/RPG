@@ -17,7 +17,7 @@ public class Taika {
 
     public Taika(String nimi, String tyyppi, int hinta, int teho) {
         this.nimi = nimi;
-        this.tyyppi=new ArrayList<>();
+        this.tyyppi = new ArrayList<>();
         this.tyyppi.add(tyyppi);
         this.hinta = hinta;
         this.teho = teho;
