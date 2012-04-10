@@ -75,6 +75,11 @@ public class VihollinenTest {
     public void testVihunLuontiWeakness() {
         assertTrue(vihu.getWeak().isEmpty());
     }
+    
+    @Test
+    public void testVihunLuontiNimi() {
+        assertEquals(vihu.getNimi(), "Anonymous");
+    }
 
     @Test
     public void testSetWeak() {
@@ -89,5 +94,11 @@ public class VihollinenTest {
     public void testAddWeak() {
         vihu.addWeak("Tuli");
         assertTrue(vihu.getWeak().contains("Tuli"));
+    }
+    
+    @Test
+    public void testSetNimi() {
+        vihu.setNimi("Pahis");
+        assertEquals(vihu.getNimi(), "Pahis");
     }
 }

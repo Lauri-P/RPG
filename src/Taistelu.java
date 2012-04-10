@@ -110,6 +110,9 @@ public class Taistelu {
                 kohde.addHP(-vahinko);
                 vuoro = false;
             }
+            else{
+                System.out.println("Not enough MP!");
+            }
         }
     }
 
@@ -130,7 +133,7 @@ public class Taistelu {
     public void taistele(Vihollinen vihu) {
         while (pelaaja.getHP() > 0 && vihu.getHP() > 0) {
             System.out.println("Player: HP " + pelaaja.getHP() + "/" + pelaaja.getMaxHP() + "   MP " + pelaaja.getMP() + "/" + pelaaja.getMaxMP() + "\n"
-                    + "Enemy: HP " + vihu.getHP() + "/" + vihu.getMaxHP() + "   MP " + vihu.getMP() + "/" + vihu.getMaxMP());
+                    + vihu.getNimi()+": HP " + vihu.getHP() + "/" + vihu.getMaxHP() + "   MP " + vihu.getMP() + "/" + vihu.getMaxMP());
             char valinta;
             vuoro = true;
             String vaihtoehdot = "RIMA";

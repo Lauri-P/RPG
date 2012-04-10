@@ -71,6 +71,8 @@ public class RPG {
         }
 
     }
+    
+    
 
     private static void huone(Pelaaja pelaaja, Huone missa, int mista) {
         String[] suunnat = {"south", "west", "north", "east"};
@@ -182,92 +184,89 @@ public class RPG {
         }
 
     }
+    
+    
 
     public static void main(String[] args) {
 
-        //Tässä on toistaiseksi vain kaikenlaista testailua
-
-
-        //Hahmonluonnin vastuuta
-        Pelaaja soturi = new Pelaaja(12, 12, 8, 8);
-        Taika tulipallo = new Taika("Tulipallo", "Tuli", 2, 8);
-        Taika vesipallo = new Taika("Vesipallo", "Vesi", 2, 8);
-        ArrayList<String> tyypit = new ArrayList<>();
-        tyypit.add("Tuli");
-        tyypit.add("Vesi");
-        Taika hoyry = new Taika("Höyryä", tyypit, 2, 4);
-        soturi.getTaiat().add(tulipallo);
-        soturi.getTaiat().add(vesipallo);
-        soturi.getTaiat().add(hoyry);
-
-        //Muuta säätöä
+        HahmoGeneraattori gener=new HahmoGeneraattori();
+        KarttaGeneraattori kartta=new KarttaGeneraattori();
+        Huone h0 = kartta.luoLuolasto();
+        System.out.println("Luolaston kokoluokka: " +kartta.kokoluokka+"x"+kartta.kokoluokka+", Huoneita: "+ kartta.maara+ "\nVihollisia: "+ kartta.vihut+", Bossi: ("+ kartta.vikaVihuX+","+kartta.vikaVihuY+")");//Tietoja luolastosta testausta varten
+        Pelaaja soturi = gener.luoPelaaja();
+//        //Tässä on toistaiseksi vain kaikenlaista testailua
+//
+//
+//        //Hahmonluonnin vastuuta
+//        HahmoGeneraattori gener=new HahmoGeneraattori();
+//        Pelaaja soturi = gener.luoPelaaja();
+//        //Muuta säätöä
         Esine potion1 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
         Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
         Esine potion2 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
         Esine potion3 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
         soturi.getInventory().addEsine(potion1);
         soturi.getInventory().addEsine(miekka);
-        soturi.getInventory().addEsine(potion1);//Testataan saman esineen laittamista inventoryyn.
         soturi.getInventory().addEsine(potion2);
         soturi.getInventory().addEsine(potion3);
-
-        //kartanluontia
-        Vihollinen vihu = new Vihollinen(1, 30, 13);
-        vihu.addWeak("Tuli");
-        Vihollinen vihu2 = new Vihollinen(12, 20, 6);
-        vihu2.addWeak("Vesi");
-        Vihollinen vihu3 = new Vihollinen(12, 24, 6);
-        vihu3.addWeak("Tuli");
-        vihu3.addWeak("Vesi");
-
-        Huone h0 = new Huone();
-        Huone h1 = new Huone();
-        Huone h2 = new Huone();
-        Huone h3 = new Huone();
-        Huone h4 = new Huone();
-
-        Arkku arkku = new Arkku();
-        Arkku arkku2 = new Arkku();
-        arkku.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
-        arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
-        arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
-        arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
-
-        h0.setPohjoinen(h1);
-        h1.setPohjoinen(h2);
-        h2.setPohjoinen(h3);
-        h3.setPohjoinen(h4);
-        h4.setEtela(h3);
-        h3.setEtela(h2);
-        h2.setEtela(h1);
-        h1.setEtela(h0);
-
-        h1.setVihollinen(vihu);
-        h2.setVihollinen(vihu2);
-        h4.setVihollinen(vihu3);
-
-        h1.setArkku(arkku);
-        h3.setArkku(arkku2);
-
-        h4.setBossi(true);
-
+//
+//        //kartanluontia
+////        Vihollinen vihu = new Vihollinen(1, 30, 13);
+////        vihu.addWeak("Tuli");
+////        Vihollinen vihu2 = new Vihollinen(12, 20, 6);
+////        vihu2.addWeak("Vesi");
+////        Vihollinen vihu3 = new Vihollinen(12, 24, 6);
+////        vihu3.addWeak("Tuli");
+////        vihu3.addWeak("Vesi");
+//
+//        Huone h0 = new Huone();
+//        Huone h1 = new Huone();
+//        Huone h2 = new Huone();
+//        Huone h3 = new Huone();
+//        Huone h4 = new Huone();
+//
+//        Arkku arkku = new Arkku();
+//        Arkku arkku2 = new Arkku();
+//        arkku.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
+//        arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
+//        arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
+//        arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
+//
+//        h0.setPohjoinen(h1);
+//        h1.setPohjoinen(h2);
+//        h2.setPohjoinen(h3);
+//        h3.setPohjoinen(h4);
+//        h4.setEtela(h3);
+//        h3.setEtela(h2);
+//        h2.setEtela(h1);
+//        h1.setEtela(h0);
+//
+//        h1.setVihollinen(gener.LuoVihu());
+//        h2.setVihollinen(gener.LuoVihu());
+//        h4.setVihollinen(gener.LuoVihu());
+//
+//        h1.setArkku(arkku);
+//        h3.setArkku(arkku2);
+//
+//        h4.setBossi(true);
+//
         huone(soturi, h0, 0);
-
-//        ArrayList<Vihollinen> vihut = new ArrayList<>();
-//        vihut.add(vihu);
-//        vihut.add(vihu2);
-//        vihut.add(vihu3);
-//        for (int i = 0; i < vihut.size(); i++) {
-//            taistelu.taistele(vihut.get(i));
-//            if (soturi.getHP() <= 0) {
-//                System.out.println("Hävisit");
-//            } else if (vihut.get(i).getHP() <= 0) {
-//                System.out.println("Voitit");
-//                soturi.addExp(vihut.get(i).getMaxHP() + vihut.get(i).getMaxMP() + vihut.get(i).getLck());
-//            } else {
-//                System.out.println("Pakenit");
-//            }
-//        }
+//
+////        ArrayList<Vihollinen> vihut = new ArrayList<>();
+////        vihut.add(vihu);
+////        vihut.add(vihu2);
+////        vihut.add(vihu3);
+////        for (int i = 0; i < vihut.size(); i++) {
+////            taistelu.taistele(vihut.get(i));
+////            if (soturi.getHP() <= 0) {
+////                System.out.println("Hävisit");
+////            } else if (vihut.get(i).getHP() <= 0) {
+////                System.out.println("Voitit");
+////                soturi.addExp(vihut.get(i).getMaxHP() + vihut.get(i).getMaxMP() + vihut.get(i).getLck());
+////            } else {
+////                System.out.println("Pakenit");
+////            }
+////        }
 
 
 

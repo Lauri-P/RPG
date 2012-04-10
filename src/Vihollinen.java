@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Vihollinen extends Hahmo {
 
     private ArrayList<String> weakness;
+    private String nimi;
 
     public Vihollinen() {
         super();
@@ -35,7 +36,7 @@ public class Vihollinen extends Hahmo {
         maxMP = 2 * getIntl();
         hp = maxHP;
         mp = maxMP;
-
+        nimi="Anonymous";
         weakness = new ArrayList<String>();
     }
 
@@ -49,5 +50,13 @@ public class Vihollinen extends Hahmo {
 
     public void addWeak(String heikkous) {
         weakness.add(heikkous);
+    }
+    
+    public String getNimi(){
+        return nimi;
+    }
+    
+    public void setNimi(String nimi){
+        this.nimi=nimi;
     }
 }
