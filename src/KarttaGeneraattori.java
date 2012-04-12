@@ -1,4 +1,8 @@
 
+/**
+ * Luokka generoi huoneista koostuvia karttoja
+ * @author Lauri
+ */
 public class KarttaGeneraattori {
 
     Noppa d4;
@@ -13,6 +17,9 @@ public class KarttaGeneraattori {
     int vikaVihuY;
     int vihut;
 
+    /**
+     * Konstruktori 5x5 alueelle mahtuvalle kartalle
+     */
     public KarttaGeneraattori() {
 
         kokoluokka = 5;
@@ -23,6 +30,10 @@ public class KarttaGeneraattori {
         gener = new HahmoGeneraattori();
     }
 
+    /**
+     * Konstruktori kartalle, joka mahtuu neliönmuotoiselle alueelle, jonka sivun pituus on parametrina annettu arvo
+     * @param koko Kartan sivun pituus
+     */
     public KarttaGeneraattori(int koko) {
         kokoluokka = koko;
         d4 = new Noppa(4);
@@ -58,7 +69,7 @@ public class KarttaGeneraattori {
                 int ovet = d4.heitto();
                 String suunnat = "1234";
 
-                while (ovet > 0) {
+                while (ovet > 1) {
                     int valinta = (int) (Math.random() * suunnat.length());
                     char ovi = suunnat.charAt(valinta);
                     suunnat = suunnat.substring(0, valinta) + suunnat.substring(valinta + 1);
@@ -103,6 +114,10 @@ public class KarttaGeneraattori {
         }
     }
 
+    /**
+     * Metodi luo luolaston ja siihen viholliset ja arkut ja nimeää yhden vihollisen bossiksi
+     * @return Palauttaa huoneen, josta seikkailu alkaa
+     */
     public Huone luoLuolasto() {
         vihut=0;
         maara = 1;

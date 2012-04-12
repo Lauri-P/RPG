@@ -1,8 +1,16 @@
 
+/**
+ * Tulkki esineiden ominaisuuksien toteuttamiseen
+ * @author Lauri
+ */
 public class EsineTulkki {
 
     Hahmo kohde;
 
+    /**
+     * Metodi toteuttaa parametrinä annetun ominaisuuden kohdehahmolle
+     * @param ominaisuus Toteutettava ominaisuus
+     */
     private void toteuta(String ominaisuus) {
         String[] toteutettava = ominaisuus.split(":");
 
@@ -28,23 +36,43 @@ public class EsineTulkki {
 //        }
     }
 
+    /**
+     * Vaihtaa parametrin ominaisuuden vaikutuksen käänteiseksi ja lähettää sen metodille toteuta
+     * @param ominaisuus Peruttava ominaisuus
+     */
     private void peru(String ominaisuus) {
         String[] peruttava = ominaisuus.split(":");
         toteuta(peruttava[0] + ":" + (-(Integer.parseInt(peruttava[1]))));
     }
 
+    /**
+     * Konstruktorille annetaan kohteeksi hahmo, johon esineiden ominaisuuksien halutaan vaikuttavan
+     * @param kohde Esineitten omiaisuuksien kohde
+     */
     public EsineTulkki(Hahmo kohde) {
         this.kohde = kohde;
     }
 
+    /**
+     * Asettaa parametrina annetun hahmon EsineTulkin uudeksi kohteeksi
+     * @param kohde Uusi kohde
+     */
     public void setHahmo(Hahmo kohde) {
         this.kohde = kohde;
     }
 
+    /**
+     * Palauttaa EsineTulkin kohteena olevan hahmon
+     * @return Kohteena oleva hahmo
+     */
     public Hahmo getHahmo() {
         return kohde;
     }
 
+    /**
+     * Lukee esineen ominaisuudet ja toteuttaa ne kohteelle. Esineen tulee olla nautittava ja nauttimaton. Muuttaa esineen consumed totuusarvoksi true
+     * @param esine Nautittava esine
+     */
     public void consume(Esine esine) {
         if (esine.getConsumable() && !esine.getConsumed()) {
             String[] ominaisuudet = esine.getOminaisuudet().split(",");
@@ -55,6 +83,10 @@ public class EsineTulkki {
         }
     }
 
+    /**
+     * Lukee esineen ominaisuudet ja toteuttaa ne kohteelle. Esineen tulee olla varustettava ja varustamaton. Muuttaa esineen equiped totuusarvoksi true 
+     * @param esine Varustettava esine
+     */
     public void equip(Esine esine) {
         if (esine.getEquipable() && !esine.getEquiped()) {
             String[] ominaisuudet = esine.getOminaisuudet().split(",");
@@ -65,6 +97,10 @@ public class EsineTulkki {
         }
     }
 
+    /**
+     * Poistaa parametrin esineen käytöstä. Lukee esineen ominaisuudet ja kumoaa ne. Esineen tulee olla varustettava ja varustettu. Muuttaa esineen equiped totuusarvoksi false 
+     * @param esine käytöstä poistettava esine
+     */
     public void unEquip(Esine esine) {
         if (esine.getEquipable() && esine.getEquiped()) {
             String[] ominaisuudet = esine.getOminaisuudet().split(",");

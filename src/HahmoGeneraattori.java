@@ -2,10 +2,28 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Luokka generoi hahmoja
+ * @author Lauri
+ */
 public class HahmoGeneraattori {
 
     public static Scanner lukija = new Scanner(System.in);
     Noppa d6;
+
+    private void pelaajanViimeistely(Pelaaja pelaaja) {
+        Taika tulipallo = new Taika("Tulipallo", "Tuli", 2, 8);
+        Taika vesipallo = new Taika("Vesipallo", "Vesi", 2, 8);
+        ArrayList<String> tyypit = new ArrayList<>();
+        tyypit.add("Tuli");
+        tyypit.add("Vesi");
+        Taika hoyry = new Taika("Höyryä", tyypit, 3, 6);
+        pelaaja.getTaiat().add(tulipallo);
+        pelaaja.getTaiat().add(vesipallo);
+        pelaaja.getTaiat().add(hoyry);
+        pelaaja.setHP(pelaaja.getMaxHP());
+        pelaaja.setMP(pelaaja.getMaxMP());
+    }
 
     private char valintaprosessi() {
         String vastaus = lukija.next();
@@ -91,10 +109,17 @@ public class HahmoGeneraattori {
         }
     }
 
+    /**
+     * Konstruktori
+     */
     public HahmoGeneraattori() {
         d6 = new Noppa();
     }
 
+    /**
+     * Metodi luo Pelaaja-luokan hahmon, jolle arvotaan statsit. Lopuksi statseja voi vielä muokata rajatusti
+     * @return Palauttaa valmiin pelaaja
+     */
     public Pelaaja luoPelaaja() {
         Pelaaja pelaaja;
         char valinta;
@@ -112,22 +137,15 @@ public class HahmoGeneraattori {
             }
         }
         hienosaato(pelaaja, d6.heitto());
-        
-        Taika tulipallo = new Taika("Tulipallo", "Tuli", 2, 8);
-        Taika vesipallo = new Taika("Vesipallo", "Vesi", 2, 8);
-        ArrayList<String> tyypit = new ArrayList<>();
-        tyypit.add("Tuli");
-        tyypit.add("Vesi");
-        Taika hoyry = new Taika("Höyryä", tyypit, 3, 6);
-        pelaaja.getTaiat().add(tulipallo);
-        pelaaja.getTaiat().add(vesipallo);
-        pelaaja.getTaiat().add(hoyry);
-        pelaaja.setHP(pelaaja.getMaxHP());
-        pelaaja.setMP(pelaaja.getMaxMP());
+        pelaajanViimeistely(pelaaja);
         return pelaaja;
     }
     
-    public Vihollinen LuoVihu(){//Luo toistaiseksi testivihollisen jonka nimi sisältää tiedon hahmon heikkouksista
+    /**
+     * Luo toistaiseksi testivihollisen jonka nimi sisältää tiedon hahmon heikkouksista. Statsit on arvottu
+     * @return Palauttaa satunnaisgeneroidun vihollisen
+     */
+    public Vihollinen LuoVihu(){
         Vihollinen vihu=new Vihollinen(d6.heitto(3),d6.heitto(3),d6.heitto(2),d6.heitto(2));
         int heikkoudet=d6.heitto();
         if(heikkoudet>2){

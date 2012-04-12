@@ -2,10 +2,22 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 
+ * @author Lauri
+ */
 public class RPG {
 
+    /**
+     * Perus skanneri tekstisyötteiden lukemiseen
+     */
     public static Scanner lukija = new Scanner(System.in);
 
+    /**
+     * Metodi luo parametrina annetun ajan mittaisen tauon
+     * 
+     * @param millis Tauon pituus millisekunteina 
+     */
     private static void odota(int millis) {
         try {
             Thread.currentThread().sleep(millis);
@@ -14,14 +26,18 @@ public class RPG {
         }
     }
 
+    /**
+     * Sekunnin mittainen tauko
+     */
     private static void odota() {
-        try {
-            Thread.currentThread().sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        odota(1000);
     }
 
+    /**
+     * Kertoo pelin loppumisen syyn parametrina annetun totuusarvon mukaan ja päättää ohjelman ajon
+     * 
+     * @param voitto True jos pelin voittoehto on täyttynyt, muuten false 
+     */
     private static void gameOver(boolean voitto) {
         if (voitto) {
             System.out.println("Onnittelut. Voitit pelin");
@@ -31,19 +47,30 @@ public class RPG {
         System.exit(0);
     }
 
+    /**
+     * Metodi kysyy seuraavaa toimintoa ja palauttaa toimintoa vastaavan merkin
+     * 
+     * @return Käyttäjän antaman syötteen ensimmäinen merkki
+     */
     private static char valintaprosessi() {
         System.out.println("Valitse toiminto: W pohjoiseen, D itään, S etelään, A länteen, I inventory, Q quit");
         String vastaus = lukija.next();
         return vastaus.toUpperCase().charAt(0);
     }
 
+    /**
+     * Metodi esittää pelaajan hallussa olevat esineet ja toteuttaa valitun esineen ominaisuudet
+     * Lisäksi esine poistetaan inventorystä jos sen consumed-arvoksi tulee true
+     * 
+     * @param pelaaja Määrittelee toiminnon kohteen
+     */
     private static void esine(Pelaaja pelaaja) {
         EsineTulkki tulkki = new EsineTulkki(pelaaja);
         System.out.println("Valitse käytettävä esine, 0 peruuttaa");
         for (int i = 0; i < pelaaja.getInventory().getEsineet().size(); i++) {
             System.out.print((i + 1) + ": " + pelaaja.getInventory().getEsineet().get(i).nimi + ": " + pelaaja.getInventory().getEsineet().get(i).kuvaus);
             if (pelaaja.getInventory().getEsineet().get(i).getEquiped()) {
-                System.out.print("(Equiped)");
+                System.out.print("(Equipped)");
             }
             System.out.println("");
         }
@@ -61,10 +88,10 @@ public class RPG {
                 }
             } else if (esine.getEquipable() && !esine.getEquiped()) {
                 tulkki.equip(esine);
-                System.out.println("You equiped " + esine.getNimi());
+                System.out.println("You equipped " + esine.getNimi());
             } else if (esine.getEquipable() && esine.getEquiped()) {
                 tulkki.unEquip(esine);
-                System.out.println("You unequiped " + esine.getNimi());
+                System.out.println("You unequipped " + esine.getNimi());
             }
             pelaaja.paivitaMaximit();
             odota();
@@ -74,6 +101,15 @@ public class RPG {
     
     
 
+    /**
+     * Metodi vastaa isosta osasta pelin kulkua. Se seuraa pelaajaa ja toteuttaa huonekohtaiset toiminnot
+     * Jos huoneessa on vihollinen, seuraa taistelu, jos pelaaja kuolee, peli päättyy, jos pelaaja pakenee, metodi arpoo pakosuunnan, jos pelaaja voittaa, pelaaja saa expaa ja voittaa pelin jos vihollinen on bossi
+     * Jos huoneessa on arkku, sen sisältö lisätään pelaajan inventoryyn, olettaen että huoneessa ei ole (enää) vihollista
+     * 
+     * @param pelaaja Pelin pelaaja
+     * @param missa Huone johon siirryttiin
+     * @param mista luku joka kertoo mistä suunnasta huoneeseen saavuttiin: 1=pohjoinen, 2=itä, 3=etelä ja 4=länsi
+     */
     private static void huone(Pelaaja pelaaja, Huone missa, int mista) {
         String[] suunnat = {"south", "west", "north", "east"};
         if (mista > 0) {
@@ -187,6 +223,7 @@ public class RPG {
     
     
 
+    
     public static void main(String[] args) {
 
         HahmoGeneraattori gener=new HahmoGeneraattori();
@@ -209,6 +246,7 @@ public class RPG {
         soturi.getInventory().addEsine(miekka);
         soturi.getInventory().addEsine(potion2);
         soturi.getInventory().addEsine(potion3);
+        
 //
 //        //kartanluontia
 ////        Vihollinen vihu = new Vihollinen(1, 30, 13);

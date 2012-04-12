@@ -2,6 +2,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Tämä luokka toteuttaa taisteluiden logiikan
+ * @author Lauri
+ */
 public class Taistelu {
 
     Noppa d6 = new Noppa();
@@ -10,6 +14,10 @@ public class Taistelu {
     Pelaaja pelaaja;
     boolean vuoro;
 
+    /**
+     * Konstruktorissa parametrin pelaaja asetetaan toiminnan toiseksi osapuoleksi
+     * @param pelaaja Taisteleva pelaaja
+     */
     public Taistelu(Pelaaja pelaaja) {
         tulkki = new EsineTulkki(pelaaja);
         this.pelaaja = pelaaja;
@@ -56,7 +64,7 @@ public class Taistelu {
         for (int i = 0; i < pelaaja.getInventory().getEsineet().size(); i++) {
             System.out.print((i + 1) + ": " + pelaaja.getInventory().getEsineet().get(i).nimi + ": " + pelaaja.getInventory().getEsineet().get(i).kuvaus);
             if (pelaaja.getInventory().getEsineet().get(i).getEquiped()) {
-                System.out.print("(Equiped)");
+                System.out.print("(Equipped)");
             }
             System.out.println("");
         }
@@ -130,6 +138,10 @@ public class Taistelu {
         vuoro = false;
     }
 
+    /**
+     * Aloittaa taistelun pelaajan ja parametrina annetun vihollisen välillä
+     * @param vihu Vastustajana toimiva vihollinen
+     */
     public void taistele(Vihollinen vihu) {
         while (pelaaja.getHP() > 0 && vihu.getHP() > 0) {
             System.out.println("Player: HP " + pelaaja.getHP() + "/" + pelaaja.getMaxHP() + "   MP " + pelaaja.getMP() + "/" + pelaaja.getMaxMP() + "\n"

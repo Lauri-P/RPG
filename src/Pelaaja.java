@@ -1,6 +1,10 @@
 
 import java.util.ArrayList;
 
+/**
+ * Hahmon aliluokka, jossa on pelaajaan liittyviä lisämuuttujia
+ * @author Lauri
+ */
 public class Pelaaja extends Hahmo {
 
     int exp;
@@ -10,26 +14,51 @@ public class Pelaaja extends Hahmo {
     Arkku inventory;
     ArrayList<Taika> taiat;
 
+    /**
+     * Kuten Hahmolla, mutta lopuksi suorittaa vielä pelaajaan liittyvät konstruktiot
+     */
     public Pelaaja() {
         super();
         luo();
     }
 
+    /**
+     * Kuten Hahmolla, mutta lopuksi suorittaa vielä pelaajaan liittyvät konstruktiot
+     * @param str Voiman arvo
+     */
     public Pelaaja(int str) {
         super(str);
         luo();
     }
 
+    /**
+     * Kuten Hahmolla, mutta lopuksi suorittaa vielä pelaajaan liittyvät konstruktiot
+     * @param str Voiman arvo
+     * @param vit Elinvoiman arvo
+     */
     public Pelaaja(int str, int vit) {
         super(str, vit);
         luo();
     }
 
+    /**
+     * Kuten Hahmolla, mutta lopuksi suorittaa vielä pelaajaan liittyvät konstruktiot
+     * @param str Voiman arvo
+     * @param vit Elinvoiman arvo
+     * @param lck Onnen arvo
+     */
     public Pelaaja(int str, int vit, int lck) {
         super(str, vit, lck);
         luo();
     }
 
+    /**
+     * Kuten Hahmolla, mutta lopuksi suorittaa vielä pelaajaan liittyvät konstruktiot
+     * @param str Voiman arvo
+     * @param vit Elinvoiman arvo
+     * @param lck Onnen arvo
+     * @param intl Älyn arvo
+     */
     public Pelaaja(int str, int vit, int lck, int intl) {
         super(str, vit, lck, intl);
         luo();
@@ -48,22 +77,42 @@ public class Pelaaja extends Hahmo {
 
     }
 
+    /**
+     * 
+     * @return Palauttaa pelaajalle kertyneen expan
+     */
     public int getExp() {
         return exp;
     }
 
+    /**
+     * 
+     * @return Palauttaa pelaajan levelin
+     */
     public int getLvl() {
         return lvl;
     }
 
+    /**
+     * Asettaa pelaajan expaksi parametrin arvon
+     * @param xp uusi expa
+     */
     public void setExp(int xp) {
         exp = xp;
     }
 
+    /**
+     * Asettaa pelaajan leveliksi parametrin arvon
+     * @param levu uusi level
+     */
     public void setLvl(int levu) {
         lvl = levu;
     }
 
+    /**
+     * Lisää expaa parametrin arvon verran. Jos expa saavuttaa seuraavan levelin tason, toteutetaan metodi levelUp
+     * @param xp Lisättävä expa
+     */
     public void addExp(int xp) {
         exp += xp;
         if (exp < 0) {
@@ -74,10 +123,17 @@ public class Pelaaja extends Hahmo {
         }
     }
 
+    /**
+     * Kasvattaa leveliä annetun parametrin verran
+     * @param levu lisättävät levelit
+     */
     public void addLvl(int levu) {
         lvl += levu;
     }
 
+    /**
+     * Kasvattaa pelaajan statseja kunnes expa ei enää riitä seuraavaan leveliin. Palauttaa HP:n Ja MP:n maksimiinsa
+     */
     public void levelUp() {
         while (exp >= 100 * lvl) {
             exp -= 100 * lvl;
@@ -103,6 +159,9 @@ public class Pelaaja extends Hahmo {
 
     }
 
+    /**
+     * Päivittää maxHP:n ja maxMP:n vastaamaan senhetkistä statstitilannetta
+     */
     public void paivitaMaximit() {
         maxHP = getStr() + 2 * getVit();
         maxMP = 2 * getIntl();
@@ -114,10 +173,18 @@ public class Pelaaja extends Hahmo {
         }
     }
 
+    /**
+     * 
+     * @return Palauttaa pelaajan inventoryn
+     */
     public Arkku getInventory() {
         return inventory;
     }
 
+    /**
+     * 
+     * @return Palauttaa pelaajan taiat
+     */
     public ArrayList<Taika> getTaiat() {
         return taiat;
     }
