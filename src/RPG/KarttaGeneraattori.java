@@ -147,9 +147,13 @@ public class KarttaGeneraattori {
             }
 
         }
-
+        if(vihut>0){
         huoneet[vikaVihuX][vikaVihuY].setBossi(true);
         huoneet[vikaVihuX][vikaVihuY].getVihollinen().setNimi(huoneet[vikaVihuX][vikaVihuY].getVihollinen().getNimi()+"Bossi");
         return alku;
+        }
+        else{
+            return luoLuolasto();
+        }
     }
 }

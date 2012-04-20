@@ -2,6 +2,7 @@ package RPG;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JFrame;
 
 /**
  * Peliä pyörittävä luokka
@@ -234,27 +235,36 @@ public class RPG {
     }
 
     public static void main(String[] args) {
+        String testi="";
+        System.out.println("Tyhjän pituus: "+testi.length());
+        RPGGUI gui = new RPGGUI();
+        gui.setTitle("RPG");
+        gui.pack();
+        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gui.setResizable(false);
+        gui.setVisible(true);
+        gui.pelaa();
 
-        HahmoGeneraattori gener = new HahmoGeneraattori();
-        KarttaGeneraattori kartta = new KarttaGeneraattori();
-        Huone h0 = kartta.luoLuolasto();
-        System.out.println("Luolaston kokoluokka: " + kartta.kokoluokka + "x" + kartta.kokoluokka + ", Huoneita: " + kartta.maara + "\nVihollisia: " + kartta.vihut + ", Bossi: (" + kartta.vikaVihuX + "," + kartta.vikaVihuY + ")");//Tietoja luolastosta testausta varten
-        Pelaaja soturi = gener.luoPelaaja();
+//        HahmoGeneraattori gener = new HahmoGeneraattori();
+//        KarttaGeneraattori kartta = new KarttaGeneraattori();
+//        Huone h0 = kartta.luoLuolasto();
+//        System.out.println("Luolaston kokoluokka: " + kartta.kokoluokka + "x" + kartta.kokoluokka + ", Huoneita: " + kartta.maara + "\nVihollisia: " + kartta.vihut + ", Bossi: (" + kartta.vikaVihuX + "," + kartta.vikaVihuY + ")");//Tietoja luolastosta testausta varten
+//        Pelaaja soturi = gener.luoPelaaja();
 //        //Tässä on toistaiseksi vain kaikenlaista testailua
 //
 //
 //        //Hahmonluonnin vastuuta
 //        HahmoGeneraattori gener=new HahmoGeneraattori();
 //        Pelaaja soturi = gener.luoPelaaja();
-//        //Muuta säätöä
-        Esine potion1 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
-        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
-        Esine potion2 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
-        Esine potion3 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
-        soturi.getInventory().addEsine(potion1);
-        soturi.getInventory().addEsine(miekka);
-        soturi.getInventory().addEsine(potion2);
-        soturi.getInventory().addEsine(potion3);
+////        //Muuta säätöä
+//        Esine potion1 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+//        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
+//        Esine potion2 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+//        Esine potion3 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+//        soturi.getInventory().addEsine(potion1);
+//        soturi.getInventory().addEsine(miekka);
+//        soturi.getInventory().addEsine(potion2);
+//        soturi.getInventory().addEsine(potion3);
 
 //
 //        //kartanluontia
@@ -297,7 +307,7 @@ public class RPG {
 //
 //        h4.setBossi(true);
 //
-        huone(soturi, h0, 0);
+//        huone(soturi, h0, 0);
 //
 ////        ArrayList<Vihollinen> vihut = new ArrayList<>();
 ////        vihut.add(vihu);

@@ -1,5 +1,7 @@
 package RPG;
 
+import javax.swing.ImageIcon;
+
 
 /**
  * Pelin luolasto koostuu huoneista, joissa voi olla vihollisia ja arkkuja, sekä ovia viereisiin huoneisiin
@@ -157,4 +159,88 @@ public class Huone {
     public void setLansi(Huone huone) {
         lansi = huone;
     }
+
+    public String getKuva(int mista){
+        String polku="";
+        String huoneet="";
+        huoneet=etsiOvet(mista, huoneet);
+        if (huoneet.length()==3){
+            polku="Kuvat\\Huone3.png";
+        }
+        if(huoneet.length()==0){
+            polku="Kuvat\\Huone0.png;";
+        }
+        if(huoneet.length()==2){
+            if(huoneet.indexOf('1')<0){
+                polku="Kuvat\\Huone2v.png;";
+            }
+            else if(huoneet.indexOf('2')<0){
+                polku="Kuvat\\Huone2k.png;";
+            }
+            else{
+                polku="Kuvat\\Huone2o.png;";
+            }
+        }
+        if(huoneet.length()==1){
+            if(huoneet.indexOf('1')>-1){
+                polku="Kuvat\\Huone1v.png;";
+            }
+            else if(huoneet.indexOf('2')>-1){
+                polku="Kuvat\\Huone1k.png;";
+            }
+            else{
+                polku="Kuvat\\Huone1o.png;";
+            }
+        }
+        return polku;
+    }
+
+    private String etsiOvet(int mista, String huoneet) {
+        if(mista==3||mista==0){
+            if(getLansi()!=null){
+                huoneet=huoneet+"1";
+            }
+            if(getPohjoinen()!=null){
+                huoneet=huoneet+"2";
+            }
+            if(getIta()!=null){
+                huoneet=huoneet+"3";
+            }
+        }
+        if(mista==4){
+            if(getPohjoinen()!=null){
+                huoneet=huoneet+"1";
+            }
+            if(getIta()!=null){
+                huoneet=huoneet+"2";
+            }
+            if(getEtela()!=null){
+                huoneet=huoneet+"3";
+            }
+        }
+        if(mista==1){
+            if(getIta()!=null){
+                huoneet=huoneet+"1";
+            }
+            if(getEtela()!=null){
+                huoneet=huoneet+"2";
+            }
+            if(getLansi()!=null){
+                huoneet=huoneet+"3";
+            }
+        }
+        if(mista==2){
+            if(getEtela()!=null){
+                huoneet=huoneet+"1";
+            }
+            if(getLansi()!=null){
+                huoneet=huoneet+"2";
+            }
+            if(getPohjoinen()!=null){
+                huoneet=huoneet+"3";
+            }
+        }
+        return huoneet;
+    }
+
 }
