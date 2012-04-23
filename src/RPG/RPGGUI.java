@@ -17,24 +17,33 @@ public class RPGGUI extends JFrame {
     }
     JPanel kuvapaneeli;
     JPanel kompassipaneeli;
-    private JLabel kuva;
-    private JLabel kompassi;
-    private JButton vasen = new JButton("<");
-    private JButton oikea = new JButton(">");
-    private JButton ylos = new JButton("^");
-    private JButton alas = new JButton("v");
-    private JButton attack = new JButton("Attack");
-    private JButton item = new JButton("Item");
-    private JButton magic = new JButton("Magic");
-    private JButton run = new JButton("Run");
-    private JTextArea teksti;
-    private JScrollPane rullaus;
-    private JTextArea statsit;
-    private JTextArea vihuStatsit;
-    private JLayeredPane kerrokset;
-    private Huone missa;
-    private int mista;
+    JLabel kuva;
+    JLabel kompassi;
+    JButton vasen = new JButton("<");
+    JButton oikea = new JButton(">");
+    JButton ylos = new JButton("^");
+    JButton alas = new JButton("v");
+    JButton attack = new JButton("Attack");
+    JButton item = new JButton("Item");
+    JButton magic = new JButton("Magic");
+    JButton run = new JButton("Run");
+    JTextArea teksti;
+    JScrollPane rullaus;
+    JTextArea statsit;
+    JTextArea vihuStatsit;
+    JLayeredPane kerrokset;
+    Huone missa;
+    int mista;
     Pelaaja pelaaja;
+    private JButton velho = new JButton("Wizard");
+    private JButton soturi = new JButton("Warrior");
+    Noppa d6;
+    boolean luotu;
+    boolean saadetty;
+    boolean lopetus;
+    private JButton strUp = new JButton("+");
+    private JButton strDown = new JButton("-");
+    JTextField str2;
 
     public RPGGUI() {
         kuva = new JLabel();
@@ -42,9 +51,12 @@ public class RPGGUI extends JFrame {
         kuvapaneeli.setPreferredSize(new Dimension(640, 480));
         kompassi = new JLabel();
         kompassipaneeli = new JPanel();
-
+        d6 = new Noppa();
+        luotu = false;
+        saadetty = false;
+        lopetus = false;
         JPanel toiminnot = new JPanel(new GridLayout(3, 3));
-        
+
         toiminnot.add(attack);
         toiminnot.add(ylos);
         toiminnot.add(item);
@@ -66,8 +78,8 @@ public class RPGGUI extends JFrame {
         vihuStatsit.setLineWrap(true);
         statsit.setEditable(false);
         vihuStatsit.setEditable(false);
-        
-        JPanel statsiruudut=new JPanel(new BorderLayout());
+
+        JPanel statsiruudut = new JPanel(new BorderLayout());
         statsiruudut.add("West", statsit);
         statsiruudut.add("East", vihuStatsit);
 
@@ -82,7 +94,7 @@ public class RPGGUI extends JFrame {
 
     }
 
-    private void lisaaTekstia(String teksti) {
+    public void lisaaTekstia(String teksti) {
         this.teksti.setText(this.teksti.getText() + "\n\n" + teksti);
         rullaus.getHorizontalScrollBar().setValue(0);
     }
@@ -386,6 +398,13 @@ public class RPGGUI extends JFrame {
         magic.setEnabled(true);
         run.setEnabled(true);
 
+//        TaisteluGUI taistelu = new TaisteluGUI(this);
+//        taistelu.setTitle("RPG");
+//        taistelu.pack();
+//        taistelu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        taistelu.setVisible(true);
+//        taistelu.taistelu();
+
 
     }
 
@@ -609,39 +628,131 @@ public class RPGGUI extends JFrame {
         setMissa(mihin);
         huone();
     }
-    
-    private void paivitaStatsit(){
+
+    private void paivitaStatsit() {
         statsit.setText("Your stats"
-                + "\nHP:\t"+ pelaaja.getHP()+"/"+pelaaja.getMaxHP()
-                + "\nMP:\t"+ pelaaja.getMP()+"/"+pelaaja.getMaxMP()
+                + "\nHP:\t" + pelaaja.getHP() + "/" + pelaaja.getMaxHP()
+                + "\nMP:\t" + pelaaja.getMP() + "/" + pelaaja.getMaxMP()
                 + "\nSTR:\t" + pelaaja.getStr()
                 + "\nVIT:\t" + pelaaja.getVit()
                 + "\nLCK:\t" + pelaaja.getLck()
                 + "\nINTL:\t" + pelaaja.getIntl()
                 + "\nLVL:\t" + pelaaja.getLvl()
-                + "\nXP:\t"+ pelaaja.getExp()+"/"+(pelaaja.getLvl()*100));
-        
-        if (missa.getVihollinen()!=null){
-            Vihollinen vihu=missa.getVihollinen();
+                + "\nXP:\t" + pelaaja.getExp() + "/" + (pelaaja.getLvl() * 100));
+
+        if (missa.getVihollinen() != null) {
+            Vihollinen vihu = missa.getVihollinen();
             vihuStatsit.setText("Enemy stats"
-                + "\nHP:\t"+ vihu.getHP()+"/"+vihu.getMaxHP()
-                + "\nMP:\t"+ vihu.getMP()+"/"+vihu.getMaxMP()
-                + "\nSTR:\t" + vihu.getStr()
-                + "\nVIT:\t" + vihu.getVit()
-                + "\nLCK:\t" + vihu.getLck()
-                + "\nINTL:\t" + vihu.getIntl()
-                + "\nName:\t" + vihu.getNimi());
-        }
-        else{
+                    + "\nHP:\t" + vihu.getHP() + "/" + vihu.getMaxHP()
+                    + "\nMP:\t" + vihu.getMP() + "/" + vihu.getMaxMP()
+                    + "\nSTR:\t" + vihu.getStr()
+                    + "\nVIT:\t" + vihu.getVit()
+                    + "\nLCK:\t" + vihu.getLck()
+                    + "\nINTL:\t" + vihu.getIntl()
+                    + "\nName:\t" + vihu.getNimi());
+        } else {
             vihuStatsit.setText("No enemy around");
         }
     }
 
+    private void luoPelaaja() {
+        JTextField kuvateksti = new JTextField("Choose your character");
+        kuvateksti.setEditable(false);
+        JPanel kyssari = new JPanel(new BorderLayout());
+        JPanel vastaukset = new JPanel(new BorderLayout());
+        vastaukset.add("East", velho);
+        vastaukset.add("West", soturi);
+        kyssari.add("North", kuvateksti);
+        kyssari.add("South", vastaukset);
+        JPanel ylaosa = new JPanel();
+        ylaosa.setPreferredSize(new Dimension(640, 240));
+        kuvapaneeli.removeAll();
+        kuvapaneeli.add("North", ylaosa);
+        kuvapaneeli.add("South", kyssari);
+        lisaaTekstia("Hahmon valinta");
+
+        soturi.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent tapahtuma) {
+                        lisaaTekstia("Soturi valittu");
+                        luo(false);
+                    }
+                });
+
+        velho.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent tapahtuma) {
+                        lisaaTekstia("Velho valittu");
+                        luo(true);
+                    }
+                });
+
+
+        while (!luotu) {
+        }
+    }
+
+    private void luo(boolean velho) {
+        if (velho) {
+            pelaaja = new Pelaaja(d6.heitto(2), d6.heitto(2), d6.heitto(2), d6.heitto(2));
+        } else {
+            pelaaja = new Pelaaja(d6.heitto(3), d6.heitto(3), d6.heitto(2));
+        }
+        lisaaTekstia("Hahmo luotu");
+//        hienosaato();
+        luotu = true;
+
+
+    }
+
+    public void hienosaato() {
+        lisaaTekstia("Hienosaato alkoi");
+        int pisteet = d6.heitto();
+        int alkuStr = pelaaja.getStr();
+        int alkuVit = pelaaja.getVit();
+        int alkuLck = pelaaja.getLck();
+        int alkuIntl = pelaaja.getIntl();
+
+        JPanel strSaadot = new JPanel(new BorderLayout());
+        strSaadot.add("North", strUp);
+        strSaadot.add("South", strDown);
+        JTextField str1 = new JTextField("STR:");
+        str2 = new JTextField(pelaaja.getStr());
+        JPanel str = new JPanel(new BorderLayout());
+        str.add("West", str1);
+        str.add("Center", str2);
+        str.add("East", strSaadot);
+
+
+        JPanel ylaosa = new JPanel();
+        ylaosa.setPreferredSize(new Dimension(640, 120));
+        kuvapaneeli.removeAll();
+        kuvapaneeli.add("North", ylaosa);
+        kuvapaneeli.add("Center", str);
+
+        strUp.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent tapahtuma) {
+                        pelaaja.addStr(1);
+                        str2.setText("" + pelaaja.getStr());
+                    }
+                });
+
+        while (!lopetus) {
+        }
+    }
+
     public void pelaa() {
-        HahmoGUI gener = new HahmoGUI(this);
+//        HahmoGUI gener = new HahmoGUI(this);
+//        pelaaja = gener.luoPelaaja();
+        luoPelaaja();
+
         KarttaGeneraattori kartta = new KarttaGeneraattori();
         missa = kartta.luoLuolasto();
-        pelaaja = gener.luoPelaaja();
+
         mista = 0;
 
         Esine potion1 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
@@ -690,5 +801,4 @@ public class RPGGUI extends JFrame {
 
         huone();
     }
-
 }

@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class HahmoGUI {
+public class HahmoGUI extends JFrame{
     
     private RPGGUI gui;
     private JButton velho=new JButton("Wizard");
@@ -41,10 +41,10 @@ public class HahmoGUI {
         }else{
             pelaaja = new Pelaaja(d6.heitto(3), d6.heitto(3), d6.heitto(2));
         }
-        hienosaato();
-        while(!saadetty){
-            
-        }
+//        hienosaato();
+//        while(!saadetty){
+//            
+//        }
         luotu=true;
     }
     
