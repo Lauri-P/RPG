@@ -1,5 +1,6 @@
 package RPG;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFrame;
@@ -234,7 +235,7 @@ public class RPG {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         String testi="";
         System.out.println("Tyhjän pituus: "+testi.length());
         RPGGUI gui = new RPGGUI();

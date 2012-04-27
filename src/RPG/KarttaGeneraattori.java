@@ -147,7 +147,7 @@ public class KarttaGeneraattori {
             }
 
         }
-        if(vihut>0){
+        if(vihut>kokoluokka){
         huoneet[vikaVihuX][vikaVihuY].setBossi(true);
         huoneet[vikaVihuX][vikaVihuY].getVihollinen().setNimi(huoneet[vikaVihuX][vikaVihuY].getVihollinen().getNimi()+"Bossi");
         return alku;

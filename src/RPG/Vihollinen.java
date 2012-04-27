@@ -11,6 +11,7 @@ public class Vihollinen extends Hahmo {
 
     private ArrayList<String> weakness;
     private String nimi;
+    private String polku;
 
     /**
      * Kuten Hahmolla, mutta lopuksi suorittaa vielä viholliseen liittyvät konstruktiot
@@ -68,6 +69,7 @@ public class Vihollinen extends Hahmo {
         hp = maxHP;
         mp = maxMP;
         nimi="Anonymous";
+        polku="Kuvat\\F.O.E..png";
         weakness = new ArrayList<String>();
     }
 
@@ -109,5 +111,13 @@ public class Vihollinen extends Hahmo {
      */
     public void setNimi(String nimi){
         this.nimi=nimi;
+    }
+    
+    public String getPolku(){
+        return polku;
+    }
+    
+    public void setPolku(String polku){
+        this.polku=polku;        
     }
 }

@@ -13,7 +13,7 @@ public class HahmoGeneraattori {
     public static Scanner lukija = new Scanner(System.in);
     Noppa d6;
 
-    private void pelaajanViimeistely(Pelaaja pelaaja) {
+    public void pelaajanViimeistely(Pelaaja pelaaja) {
         Taika tulipallo = new Taika("Tulipallo", "Tuli", 2, 8);
         Taika vesipallo = new Taika("Vesipallo", "Vesi", 2, 8);
         ArrayList<String> tyypit = new ArrayList<>();
