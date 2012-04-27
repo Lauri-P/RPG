@@ -302,16 +302,16 @@ public class RPGGUI extends JFrame {
         if (missa.getArkku() != null && missa.getArkku().getEsineet().size() > 0) {
             lisaaTekstia("There is chest in room.");
 
-//            try {
-//                arkkuYhdiste();
-//            } catch (Exception e) {
-//                lisaaTekstia("KuvaFail");
-//            }
+            try {
+                arkkuYhdiste();
+            } catch (Exception e) {
+                lisaaTekstia("ArkkuKuvaFail");
+            }
 //            arkulla = new JLabel(new ImageIcon("arkkuYhdiste.png"));
-//            kuvapaneeli.remove(kuva);
-//            kuvapaneeli.add(arkulla);
-//            this.pack();
-//            this.repaint();
+            kuvapaneeli.removeAll();
+            kuvapaneeli.add(new JLabel(new ImageIcon("arkkuYhdiste.png")));
+            this.pack();
+            this.repaint();
 
             for (int i = 0; i < missa.getArkku().getEsineet().size(); i++) {
                 pelaaja.getInventory().addEsine(missa.getArkku().getEsineet().get(i));
@@ -592,7 +592,7 @@ public class RPGGUI extends JFrame {
         try {
             huoneenValinta(huoneet);
         } catch (Exception e) {
-            lisaaTekstia("KuvaFail");
+            lisaaTekstia("HuoneFail");
         }
 
 
@@ -601,11 +601,11 @@ public class RPGGUI extends JFrame {
             try {
                 vihuYhdiste();
             } catch (Exception e) {
-                lisaaTekstia("KuvaFail");
+                lisaaTekstia("VihuKuvaFail");
             }
-            vihulla = new JLabel(new ImageIcon("vihuYhdiste.png"));
+//            vihulla = new JLabel(new ImageIcon("vihuYhdiste.png"));
             kuvapaneeli.removeAll();
-            kuvapaneeli.add(vihulla);
+            kuvapaneeli.add(new JLabel(new ImageIcon("vihuYhdiste.png")));
             this.repaint();
             this.pack();
 
@@ -1140,7 +1140,8 @@ public class RPGGUI extends JFrame {
                     esineet = false;
                     paivitaStatsit();
                     if (attack.isEnabled()) {
-                        vihunVuoro();
+                        vuoronJalkeen();
+//                        vihunVuoro();
                     }
                 }
             }
