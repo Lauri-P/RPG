@@ -1,0 +1,4 @@
+﻿Potion;HP:20;Palauttaa 20HP;0;1
+Mana Potion;MP:10;Palauttaa 10MP;0;1
+Ring of Luck;LCK:4;Lck +4;1;0
+Multipotion;HP:20,MP:10;Palauttaa 20HP ja 10MP;0;1

@@ -160,6 +160,11 @@ public class Huone {
         lansi = huone;
     }
 
+    /**
+     * Palauttaa polun kuvaan, joka vastaa huoneen näkymää tulosuunnasta katsottuna
+     * @param mista Suuntaa, josta huoneeseen saavutaan, vastaava numero. Pohjoinen=1, Itä=2; Etelä=3 ja Länsi=4. Pelin aloitushuoneeseen ei saavuta mistään ja tätä vastaa luku 0. Pelaaja katsoo tällöin pohjoiseen
+     * @return Polku näkymää vastaavaan kuvaan
+     */
     public String getKuva(int mista){
         String polku="";
         String huoneet="";

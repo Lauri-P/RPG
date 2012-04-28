@@ -1,5 +1,8 @@
 package RPG;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Luokka generoi huoneista koostuvia karttoja
@@ -18,6 +21,8 @@ public class KarttaGeneraattori {
     int vikaVihuX;
     int vikaVihuY;
     int vihut;
+    private Scanner teksti;
+    ArrayList<String> esineet;
 
     /**
      * Konstruktori 5x5 alueelle mahtuvalle kartalle
@@ -30,6 +35,18 @@ public class KarttaGeneraattori {
         pArkku = 0.5;
         pVihu = 0.5;
         gener = new HahmoGeneraattori();
+
+        File tiedosto = new File("Item.txt");
+        try {
+            teksti = new Scanner(tiedosto);
+        } catch (Exception e) {
+            System.out.println("Tiedostoa \"Item.txt\" ei löydy, ohjelma keskeytetään");
+            System.exit(0);
+        }
+        esineet = new ArrayList<>();
+        while (teksti.hasNextLine()) {
+            esineet.add(teksti.nextLine());
+        }
     }
 
     /**
@@ -64,7 +81,16 @@ public class KarttaGeneraattori {
                 }
                 if (Math.random() <= pArkku) {//Toistaiseksi arkuissa vain potioneja
                     Arkku arkku = new Arkku();
-                    arkku.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
+                    int esineita=d3.heitto();
+                    for (int i=0;i<esineita;i++){
+                    String[] esineenTiedot = esineet.get((int) (Math.random() * esineet.size())).split(";");
+                    String nimi = esineenTiedot[0];
+                    String ominaisuudet = esineenTiedot[1];
+                    String kuvaus = esineenTiedot[2];
+                    boolean equipable=esineenTiedot[3].equals("1");
+                    boolean consumable=esineenTiedot[4].equals("1");
+                    arkku.addEsine(new Esine(nimi, ominaisuudet, kuvaus, equipable, consumable));
+                    }
                     huoneet[x][y].setArkku(arkku);
                 }
 
@@ -121,7 +147,7 @@ public class KarttaGeneraattori {
      * @return Palauttaa huoneen, josta seikkailu alkaa
      */
     public Huone luoLuolasto() {
-        vihut=0;
+        vihut = 0;
         maara = 1;
         huoneet = new Huone[kokoluokka][kokoluokka];
         Huone alku = new Huone();
@@ -147,12 +173,11 @@ public class KarttaGeneraattori {
             }
 
         }
-        if(vihut>kokoluokka){
-        huoneet[vikaVihuX][vikaVihuY].setBossi(true);
-        huoneet[vikaVihuX][vikaVihuY].getVihollinen().setNimi(huoneet[vikaVihuX][vikaVihuY].getVihollinen().getNimi()+"Bossi");
-        return alku;
-        }
-        else{
+        if (vihut > kokoluokka) {
+            huoneet[vikaVihuX][vikaVihuY].setBossi(true);
+            huoneet[vikaVihuX][vikaVihuY].getVihollinen().setNimi(huoneet[vikaVihuX][vikaVihuY].getVihollinen().getNimi() + "Bossi");
+            return alku;
+        } else {
             return luoLuolasto();
         }
     }

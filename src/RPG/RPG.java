@@ -236,8 +236,6 @@ public class RPG {
     }
 
     public static void main(String[] args) throws IOException{
-        String testi="";
-        System.out.println("Tyhjän pituus: "+testi.length());
         RPGGUI gui = new RPGGUI();
         gui.setTitle("RPG");
         gui.pack();
@@ -320,7 +318,11 @@ public class RPG {
 ////                System.out.println("Hävisit");
 ////            } else if (vihut.get(i).getHP() <= 0) {
 ////                System.out.println("Voitit");
+////                int levu=soturi.getLvl();
 ////                soturi.addExp(vihut.get(i).getMaxHP() + vihut.get(i).getMaxMP() + vihut.get(i).getLck());
+////                if(soturi.getLvl()>levu){
+////                    System.out.println("Level up!");
+////                }
 ////            } else {
 ////                System.out.println("Pakenit");
 ////            }

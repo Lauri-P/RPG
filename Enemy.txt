@@ -1,0 +1,4 @@
+﻿FireF.O.E:Kuvat\F.O.E..png:3:0:3:0:2:0:2:0:Tuli
+WaterF.O.E:Kuvat\F.O.E.blue.png:3:0:3:0:2:0:2:0:Vesi
+EA Origin:Kuvat\F.O.E..png:3:0:3:0:2:0:2:0:Tuli:Vesi
+Weakling:Kuvat\F.O.E..png:0:1:0:1:0:1:0:1

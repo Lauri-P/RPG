@@ -113,10 +113,18 @@ public class Vihollinen extends Hahmo {
         this.nimi=nimi;
     }
     
+    /**
+     * Palauttaa vihollista vastaavan kuvan polun
+     * @return Polku vihollisen kuvaan
+     */
     public String getPolku(){
         return polku;
     }
     
+    /**
+     * Asettaa vihollista vastaavan kuvan polun
+     * @param polku Polku vihollisen kuvaan
+     */
     public void setPolku(String polku){
         this.polku=polku;        
     }

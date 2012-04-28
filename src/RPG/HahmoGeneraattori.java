@@ -1,6 +1,7 @@
 package RPG;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +13,13 @@ public class HahmoGeneraattori {
 
     public static Scanner lukija = new Scanner(System.in);
     Noppa d6;
+    private Scanner teksti;
+    ArrayList<String> vihut;
 
+    /**
+     * Antaa pelaajalle oletustaiat: Tulipallo, Vesipallo ja Höyryä
+     * @param pelaaja Viimeisteltävä pelaaja
+     */
     public void pelaajanViimeistely(Pelaaja pelaaja) {
         Taika tulipallo = new Taika("Tulipallo", "Tuli", 2, 8);
         Taika vesipallo = new Taika("Vesipallo", "Vesi", 2, 8);
@@ -112,10 +119,24 @@ public class HahmoGeneraattori {
     }
 
     /**
-     * Konstruktori
+     * Konstruktori: Lukee tiedoston Enemy.txt, jonka jokaisella rivillä on kuvattu yksi mahdollinen vihollinen seuraavassa muodossa:
+     * Nimi:Kuvatiedosto polkuineen:STR satunnaisosa:STR pohja:VIT satunnaisosa:VIT pohja:LCK satunnaisosa:LCK pohja:INTL satunnaisosa:INTL pohja:Heikkous1:Heikkous2:...
+     * Satunnaisosat tarkoittavat montako noppaa heitetään kyseistä statsin kohdalla ja pohja lisätään tähän tulokseen. Heikkouksia voi liittää mielivaltaisen määrän tai ei yhtään
      */
     public HahmoGeneraattori() {
         d6 = new Noppa();
+        File tiedosto=new File("Enemy.txt");
+        try {
+            teksti = new Scanner(tiedosto);
+        } catch (Exception e) {
+            System.out.println("Tiedostoa \"Enemy.txt\" ei löydy, ohjelma keskeytetään");
+            System.exit(0);
+        }
+        vihut=new ArrayList<>();
+        while(teksti.hasNextLine()){
+            vihut.add(teksti.nextLine());
+        }
+        
     }
 
     /**
@@ -144,21 +165,23 @@ public class HahmoGeneraattori {
     }
     
     /**
-     * Luo toistaiseksi testivihollisen jonka nimi sisältää tiedon hahmon heikkouksista. Statsit on arvottu
-     * @return Palauttaa satunnaisgeneroidun vihollisen
+     * Lukee satunnaisen rivin tiedostosta Enemy.txt ja luo sen perusteella vihollisen
+     * @return Palauttaa jonkin Enemy.txt:ssä kuvatuista vihollisista
      */
     public Vihollinen luoVihu(){
-        Vihollinen vihu=new Vihollinen(d6.heitto(3),d6.heitto(3),d6.heitto(2),d6.heitto(2));
-        int heikkoudet=d6.heitto();
-        if(heikkoudet>2){
-            vihu.addWeak("Tuli");
-            vihu.setNimi(vihu.getNimi()+"T");
+        String[] vihunTiedot=vihut.get((int)(Math.random()*vihut.size())).split(":");
+        String nimi=vihunTiedot[0];
+        String polku=vihunTiedot[1];
+        int str=d6.heitto(Integer.parseInt(vihunTiedot[2]))+Integer.parseInt(vihunTiedot[3]);
+        int vit=d6.heitto(Integer.parseInt(vihunTiedot[4]))+Integer.parseInt(vihunTiedot[5]);
+        int lck=d6.heitto(Integer.parseInt(vihunTiedot[6]))+Integer.parseInt(vihunTiedot[7]);
+        int intl=d6.heitto(Integer.parseInt(vihunTiedot[8]))+Integer.parseInt(vihunTiedot[9]);
+        Vihollinen vihu=new Vihollinen(str,vit,lck,intl);
+        for(int i=10;i<vihunTiedot.length;i++){
+            vihu.addWeak(vihunTiedot[i]);
         }
-        
-        if(heikkoudet<5){
-            vihu.addWeak("Vesi");
-            vihu.setNimi(vihu.getNimi()+"V");
-        }
+        vihu.setNimi(nimi);
+        vihu.setPolku(polku);
         return vihu;
     }
 }
