@@ -54,6 +54,9 @@ public class KarttaGeneraattori {
      * @param koko Kartan sivun pituus
      */
     public KarttaGeneraattori(int koko) {
+        if (koko < 2) {
+            koko = 2;
+        }
         kokoluokka = koko;
         d4 = new Noppa(4);
         d3 = new Noppa(3);
@@ -81,15 +84,15 @@ public class KarttaGeneraattori {
                 }
                 if (Math.random() <= pArkku) {//Toistaiseksi arkuissa vain potioneja
                     Arkku arkku = new Arkku();
-                    int esineita=d3.heitto();
-                    for (int i=0;i<esineita;i++){
-                    String[] esineenTiedot = esineet.get((int) (Math.random() * esineet.size())).split(";");
-                    String nimi = esineenTiedot[0];
-                    String ominaisuudet = esineenTiedot[1];
-                    String kuvaus = esineenTiedot[2];
-                    boolean equipable=esineenTiedot[3].equals("1");
-                    boolean consumable=esineenTiedot[4].equals("1");
-                    arkku.addEsine(new Esine(nimi, ominaisuudet, kuvaus, equipable, consumable));
+                    int esineita = d3.heitto();
+                    for (int i = 0; i < esineita; i++) {
+                        String[] esineenTiedot = esineet.get((int) (Math.random() * esineet.size())).split(";");
+                        String nimi = esineenTiedot[0];
+                        String ominaisuudet = esineenTiedot[1];
+                        String kuvaus = esineenTiedot[2];
+                        boolean equipable = esineenTiedot[3].equals("1");
+                        boolean consumable = esineenTiedot[4].equals("1");
+                        arkku.addEsine(new Esine(nimi, ominaisuudet, kuvaus, equipable, consumable));
                     }
                     huoneet[x][y].setArkku(arkku);
                 }

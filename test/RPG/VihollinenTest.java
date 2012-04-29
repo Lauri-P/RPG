@@ -1,6 +1,5 @@
 package RPG;
 
-
 import RPG.Vihollinen;
 import java.util.ArrayList;
 import org.junit.After;
@@ -78,10 +77,15 @@ public class VihollinenTest {
     public void testVihunLuontiWeakness() {
         assertTrue(vihu.getWeak().isEmpty());
     }
-    
+
     @Test
     public void testVihunLuontiNimi() {
         assertEquals(vihu.getNimi(), "Anonymous");
+    }
+
+    @Test
+    public void testVihunLuontiPolku() {
+        assertEquals(vihu.getPolku(), "Kuvat\\F.O.E..png");
     }
 
     @Test
@@ -98,10 +102,16 @@ public class VihollinenTest {
         vihu.addWeak("Tuli");
         assertTrue(vihu.getWeak().contains("Tuli"));
     }
-    
+
     @Test
     public void testSetNimi() {
         vihu.setNimi("Pahis");
         assertEquals(vihu.getNimi(), "Pahis");
+    }
+
+    @Test
+    public void testSetPolku() {
+        vihu.setPolku("Kuvat\\F.O.E.blue.png");
+        assertEquals(vihu.getPolku(), "Kuvat\\F.O.E.blue.png");
     }
 }

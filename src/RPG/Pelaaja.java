@@ -157,7 +157,7 @@ public class Pelaaja extends Hahmo {
         paivitaMaximit();
         hp = maxHP;
         mp = maxMP;
-        System.out.println("LEVEL UP!\nSTR: " + getStr() + "  VIT: " + getVit() + "  LCK: " + getLck() + "  INTL: " + getIntl() + "\nHP: " + getHP() + "/" + getMaxHP() + "  MP: " + getMP() + "/" + getMaxMP());
+//        System.out.println("LEVEL UP!\nSTR: " + getStr() + "  VIT: " + getVit() + "  LCK: " + getLck() + "  INTL: " + getIntl() + "\nHP: " + getHP() + "/" + getMaxHP() + "  MP: " + getMP() + "/" + getMaxMP());
 
     }
 

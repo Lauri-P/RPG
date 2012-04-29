@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Peliä pyörittävä luokka
@@ -15,6 +16,33 @@ public class RPG {
      * Perus skanneri tekstisyötteiden lukemiseen
      */
     public static Scanner lukija = new Scanner(System.in);
+
+    private static void guilla() {
+        RPGGUI gui = new RPGGUI();
+        gui.setTitle("RPG");
+        gui.pack();
+        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gui.setResizable(false);
+        gui.setVisible(true);
+        gui.pelaa();
+    }
+
+    private static void guiton() {
+        HahmoGeneraattori gener = new HahmoGeneraattori();
+        KarttaGeneraattori kartta = new KarttaGeneraattori();
+        Huone h0 = kartta.luoLuolasto();
+//        System.out.println("Luolaston kokoluokka: " + kartta.kokoluokka + "x" + kartta.kokoluokka + ", Huoneita: " + kartta.maara + "\nVihollisia: " + kartta.vihut + ", Bossi: (" + kartta.vikaVihuX + "," + kartta.vikaVihuY + ")");//Tietoja luolastosta testausta varten
+        Pelaaja soturi = gener.luoPelaaja();
+        Esine potion1 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
+        Esine potion2 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+        Esine potion3 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
+        soturi.getInventory().addEsine(potion1);
+        soturi.getInventory().addEsine(miekka);
+        soturi.getInventory().addEsine(potion2);
+        soturi.getInventory().addEsine(potion3);
+        huone(soturi, h0, 0);
+    }
 
     private static void huoneListaus(Huone missa, ArrayList<Huone> huoneet) {
         if (missa.getPohjoinen() != null) {
@@ -235,101 +263,34 @@ public class RPG {
 
     }
 
-    public static void main(String[] args) throws IOException{
-        RPGGUI gui = new RPGGUI();
-        gui.setTitle("RPG");
-        gui.pack();
-        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setResizable(false);
-        gui.setVisible(true);
-        gui.pelaa();
+    private static int kysyInt(String kysymys) {
+        String tarjokas = "";
+        int arvo = 0;
+        boolean kunnossa = false;
+        do {
+            try {
+                tarjokas = JOptionPane.showInputDialog(kysymys);
+                arvo = Integer.parseInt(tarjokas);
+                kunnossa = true;
+            } catch (Exception e) {
+                if (tarjokas == null) {
+                    JOptionPane.showMessageDialog(null, "Cancel is not an integer!", "", JOptionPane.PLAIN_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, tarjokas + " is not an integer!", "", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        } while (!kunnossa);
 
-//        HahmoGeneraattori gener = new HahmoGeneraattori();
-//        KarttaGeneraattori kartta = new KarttaGeneraattori();
-//        Huone h0 = kartta.luoLuolasto();
-//        System.out.println("Luolaston kokoluokka: " + kartta.kokoluokka + "x" + kartta.kokoluokka + ", Huoneita: " + kartta.maara + "\nVihollisia: " + kartta.vihut + ", Bossi: (" + kartta.vikaVihuX + "," + kartta.vikaVihuY + ")");//Tietoja luolastosta testausta varten
-//        Pelaaja soturi = gener.luoPelaaja();
-//        //Tässä on toistaiseksi vain kaikenlaista testailua
-//
-//
-//        //Hahmonluonnin vastuuta
-//        HahmoGeneraattori gener=new HahmoGeneraattori();
-//        Pelaaja soturi = gener.luoPelaaja();
-////        //Muuta säätöä
-//        Esine potion1 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
-//        Esine miekka = new Esine("Miekka", "STR:3", "Voima +3", true, false);
-//        Esine potion2 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
-//        Esine potion3 = new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true);
-//        soturi.getInventory().addEsine(potion1);
-//        soturi.getInventory().addEsine(miekka);
-//        soturi.getInventory().addEsine(potion2);
-//        soturi.getInventory().addEsine(potion3);
+        return arvo;
+    }
 
-//
-//        //kartanluontia
-////        Vihollinen vihu = new Vihollinen(1, 30, 13);
-////        vihu.addWeak("Tuli");
-////        Vihollinen vihu2 = new Vihollinen(12, 20, 6);
-////        vihu2.addWeak("Vesi");
-////        Vihollinen vihu3 = new Vihollinen(12, 24, 6);
-////        vihu3.addWeak("Tuli");
-////        vihu3.addWeak("Vesi");
-//
-//        Huone h0 = new Huone();
-//        Huone h1 = new Huone();
-//        Huone h2 = new Huone();
-//        Huone h3 = new Huone();
-//        Huone h4 = new Huone();
-//
-//        Arkku arkku = new Arkku();
-//        Arkku arkku2 = new Arkku();
-//        arkku.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
-//        arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
-//        arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
-//        arkku2.addEsine(new Esine("Potion", "HP:20", "Palauttaa 20HP", false, true));
-//
-//        h0.setPohjoinen(h1);
-//        h1.setPohjoinen(h2);
-//        h2.setPohjoinen(h3);
-//        h3.setPohjoinen(h4);
-//        h4.setEtela(h3);
-//        h3.setEtela(h2);
-//        h2.setEtela(h1);
-//        h1.setEtela(h0);
-//
-//        h1.setVihollinen(gener.LuoVihu());
-//        h2.setVihollinen(gener.LuoVihu());
-//        h4.setVihollinen(gener.LuoVihu());
-//
-//        h1.setArkku(arkku);
-//        h3.setArkku(arkku2);
-//
-//        h4.setBossi(true);
-//
-//        huone(soturi, h0, 0);
-//
-////        ArrayList<Vihollinen> vihut = new ArrayList<>();
-////        vihut.add(vihu);
-////        vihut.add(vihu2);
-////        vihut.add(vihu3);
-////        for (int i = 0; i < vihut.size(); i++) {
-////            taistelu.taistele(vihut.get(i));
-////            if (soturi.getHP() <= 0) {
-////                System.out.println("Hävisit");
-////            } else if (vihut.get(i).getHP() <= 0) {
-////                System.out.println("Voitit");
-////                int levu=soturi.getLvl();
-////                soturi.addExp(vihut.get(i).getMaxHP() + vihut.get(i).getMaxMP() + vihut.get(i).getLck());
-////                if(soturi.getLvl()>levu){
-////                    System.out.println("Level up!");
-////                }
-////            } else {
-////                System.out.println("Pakenit");
-////            }
-////        }
-
-
-
-
+    /**
+     * Aloittaa pelin. Pelaaja voi valita ponnahdusikkunasta GUI-version tai tekstiversion
+     * @param args
+     * @throws IOException
+     */
+    public static void main(String[] args) throws IOException {
+        guilla();
+//        guiton();
     }
 }
